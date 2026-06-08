@@ -11,42 +11,7 @@ import { ComposableMap, Geographies, Geography, Marker, ZoomableGroup } from "re
 
 const geoUrl = "https://raw.githubusercontent.com/HindustanTimesLabs/shapefiles/master/india/state_ut/india_state.json";
 
-// Shared Map Data
-const dialectMarkers = [
-  // MACRO (Broad State-Level Zones)
-  { coordinates: [78.0, 25.0] as [number, number], name: "Hindi (Belt)", speakers: "300M+", engagement: "65", type: "HUB", networkStatus: "CLAIMED", color: "#C0392B", spread: { rx: 120, ry: 80, rotate: -10 } },
-  { coordinates: [74.0, 19.0] as [number, number], name: "Marathi (Belt)", speakers: "83M+", engagement: "60", type: "HUB", networkStatus: "CLAIMED", color: "#D35400", spread: { rx: 80, ry: 60, rotate: 10 } },
-  { coordinates: [88.3, 22.5] as [number, number], name: "Bengali (Belt)", speakers: "97M+", engagement: "62", type: "HUB", networkStatus: "CLAIMED", color: "#8E44AD", spread: { rx: 50, ry: 60, rotate: -15 } },
-  { coordinates: [75.5, 30.5] as [number, number], name: "Punjabi (Belt)", speakers: "33M+", engagement: "75", type: "HUB", networkStatus: "DEPLOYABLE", color: "#3498DB", spread: { rx: 40, ry: 30, rotate: -20 } },
-  { coordinates: [71.5, 23.0] as [number, number], name: "Gujarati (Belt)", speakers: "55M+", engagement: "70", type: "HUB", networkStatus: "DEPLOYABLE", color: "#16A085", spread: { rx: 60, ry: 50, rotate: -15 } },
-  { coordinates: [84.5, 20.5] as [number, number], name: "Odia (Belt)", speakers: "35M+", engagement: "65", type: "HUB", networkStatus: "DEPLOYABLE", color: "#27AE60", spread: { rx: 50, ry: 40, rotate: 0 } },
-  { coordinates: [82.0, 21.0] as [number, number], name: "Chhattisgarhi (Belt)", speakers: "16M+", engagement: "68", type: "HUB", networkStatus: "DEPLOYABLE", color: "#9B59B6", spread: { rx: 40, ry: 50, rotate: 10 } },
-  { coordinates: [76.0, 29.0] as [number, number], name: "Haryanvi (Belt)", speakers: "10M+", engagement: "72", type: "HUB", networkStatus: "DEPLOYABLE", color: "#F39C12", spread: { rx: 30, ry: 25, rotate: -10 } },
-  
-  // MICRO (The Distinct Linguistic Painted Zones > 1M Speakers)
-  { coordinates: [81.5, 24.5] as [number, number], name: "Bagheli", speakers: "8M+", engagement: "97", type: "NODE", networkStatus: "CRITICAL", color: "#9B59B6", spread: { rx: 25, ry: 15, rotate: 20 }, secondaryDialects: [{ name: "Rewa Core", speakers: "3M+" }] },
-  { coordinates: [83.1, 25.6] as [number, number], name: "Bhojpuri", speakers: "50M+", engagement: "96", type: "NODE", networkStatus: "DEPLOYABLE", color: "#F39C12", spread: { rx: 35, ry: 25, rotate: -10 } },
-  { coordinates: [75.5, 26.5] as [number, number], name: "Marwari", speakers: "8M+", engagement: "92", type: "NODE", networkStatus: "DEPLOYABLE", color: "#F1C40F", spread: { rx: 40, ry: 25, rotate: 15 }, secondaryDialects: [{ name: "Mewari Overlap", speakers: "2.1M+" }] },
-  { coordinates: [76.0, 23.5] as [number, number], name: "Malwi", speakers: "5M+", engagement: "94", type: "NODE", networkStatus: "CRITICAL", color: "#16A085", spread: { rx: 25, ry: 20, rotate: -5 } },
-  { coordinates: [79.5, 24.5] as [number, number], name: "Bundeli", speakers: "6M+", engagement: "95", type: "NODE", networkStatus: "CRITICAL", color: "#E67E22", spread: { rx: 30, ry: 20, rotate: 10 } },
-  { coordinates: [81.5, 26.5] as [number, number], name: "Awadhi", speakers: "40M+", engagement: "93", type: "NODE", networkStatus: "DEPLOYABLE", color: "#2ECC71", spread: { rx: 40, ry: 20, rotate: -15 } },
-  { coordinates: [86.5, 26.5] as [number, number], name: "Maithili", speakers: "34M+", engagement: "95", type: "NODE", networkStatus: "DEPLOYABLE", color: "#E74C3C", spread: { rx: 25, ry: 15, rotate: -20 } },
-  { coordinates: [74.5, 18.5] as [number, number], name: "Pune Marathi (Deshi)", speakers: "15M+", engagement: "88", type: "NODE", networkStatus: "CLAIMED", color: "#2980B9", spread: { rx: 25, ry: 35, rotate: 15 } },
-  { coordinates: [79.0, 21.0] as [number, number], name: "Nagpuri Marathi (Varhadi)", speakers: "10M+", engagement: "91", type: "NODE", networkStatus: "CRITICAL", color: "#8E44AD", spread: { rx: 25, ry: 20, rotate: 0 } },
-  { coordinates: [71.5, 22.0] as [number, number], name: "Kathiawadi", speakers: "12M+", engagement: "93", type: "NODE", networkStatus: "DEPLOYABLE", color: "#1ABC9C", spread: { rx: 25, ry: 20, rotate: -10 } },
-  
-  // NEW MASSIVE NODES ADDED
-  { coordinates: [85.5, 24.5] as [number, number], name: "Magahi", speakers: "12.7M+", engagement: "95", type: "NODE", networkStatus: "DEPLOYABLE", color: "#E74C3C", spread: { rx: 35, ry: 25, rotate: 10 } },
-  { coordinates: [74.0, 24.5] as [number, number], name: "Mewari", speakers: "4.2M+", engagement: "94", type: "NODE", networkStatus: "DEPLOYABLE", color: "#F39C12", spread: { rx: 25, ry: 20, rotate: 0 } },
-  { coordinates: [73.5, 23.5] as [number, number], name: "Wagdi", speakers: "3.3M+", engagement: "92", type: "NODE", networkStatus: "DEPLOYABLE", color: "#1ABC9C", spread: { rx: 20, ry: 15, rotate: -15 } },
-  { coordinates: [76.0, 25.0] as [number, number], name: "Harauti", speakers: "2.9M+", engagement: "91", type: "NODE", networkStatus: "DEPLOYABLE", color: "#D35400", spread: { rx: 20, ry: 20, rotate: 0 } },
-  { coordinates: [78.5, 30.2] as [number, number], name: "Garhwali", speakers: "2.5M+", engagement: "96", type: "NODE", networkStatus: "CRITICAL", color: "#3498DB", spread: { rx: 20, ry: 20, rotate: -10 } },
-  { coordinates: [79.8, 29.6] as [number, number], name: "Kumaoni", speakers: "2.0M+", engagement: "95", type: "NODE", networkStatus: "CRITICAL", color: "#2980B9", spread: { rx: 20, ry: 15, rotate: 15 } },
-  { coordinates: [83.5, 21.0] as [number, number], name: "Sambalpuri", speakers: "2.6M+", engagement: "97", type: "NODE", networkStatus: "CRITICAL", color: "#27AE60", spread: { rx: 30, ry: 25, rotate: 20 } },
-  { coordinates: [75.0, 32.7] as [number, number], name: "Dogri", speakers: "2.6M+", engagement: "93", type: "NODE", networkStatus: "DEPLOYABLE", color: "#8E44AD", spread: { rx: 25, ry: 15, rotate: -20 } },
-  { coordinates: [75.0, 21.0] as [number, number], name: "Khandeshi", speakers: "1.8M+", engagement: "90", type: "NODE", networkStatus: "DEPLOYABLE", color: "#E67E22", spread: { rx: 25, ry: 15, rotate: 0 } },
-  { coordinates: [83.0, 23.0] as [number, number], name: "Surgujia", speakers: "1.7M+", engagement: "91", type: "NODE", networkStatus: "DEPLOYABLE", color: "#9B59B6", spread: { rx: 20, ry: 15, rotate: 10 } },
-];
+import { dialectMarkers, DialectMarker } from "@/lib/data";
 
 const pricing_model = {
   HUB: {

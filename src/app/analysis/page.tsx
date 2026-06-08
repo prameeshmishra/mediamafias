@@ -10,42 +10,7 @@ import { Crosshair, Lock, Database } from "lucide-react";
 // Official-aligned GeoJSON that includes full Jammu & Kashmir (POK)
 const geoUrl = "https://raw.githubusercontent.com/HindustanTimesLabs/shapefiles/master/india/state_ut/india_state.json";
 
-// Shared Map Data
-const dialectMarkers = [
-  // MACRO (Broad State-Level Zones)
-  { coordinates: [78.0, 25.0] as [number, number], name: "Hindi (Belt)", speakers: "300M+", engagement: "65", type: "HUB", networkStatus: "CLAIMED", color: "#C0392B", spread: { rx: 120, ry: 80, rotate: -10 } },
-  { coordinates: [74.0, 19.0] as [number, number], name: "Marathi (Belt)", speakers: "83M+", engagement: "60", type: "HUB", networkStatus: "CLAIMED", color: "#D35400", spread: { rx: 80, ry: 60, rotate: 10 } },
-  { coordinates: [88.3, 22.5] as [number, number], name: "Bengali (Belt)", speakers: "97M+", engagement: "62", type: "HUB", networkStatus: "CLAIMED", color: "#8E44AD", spread: { rx: 50, ry: 60, rotate: -15 } },
-  { coordinates: [75.5, 30.5] as [number, number], name: "Punjabi (Belt)", speakers: "33M+", engagement: "75", type: "HUB", networkStatus: "DEPLOYABLE", color: "#3498DB", spread: { rx: 40, ry: 30, rotate: -20 } },
-  { coordinates: [71.5, 23.0] as [number, number], name: "Gujarati (Belt)", speakers: "55M+", engagement: "70", type: "HUB", networkStatus: "DEPLOYABLE", color: "#16A085", spread: { rx: 60, ry: 50, rotate: -15 } },
-  { coordinates: [84.5, 20.5] as [number, number], name: "Odia (Belt)", speakers: "35M+", engagement: "65", type: "HUB", networkStatus: "DEPLOYABLE", color: "#27AE60", spread: { rx: 50, ry: 40, rotate: 0 } },
-  { coordinates: [82.0, 21.0] as [number, number], name: "Chhattisgarhi (Belt)", speakers: "16M+", engagement: "68", type: "HUB", networkStatus: "DEPLOYABLE", color: "#9B59B6", spread: { rx: 40, ry: 50, rotate: 10 } },
-  { coordinates: [76.0, 29.0] as [number, number], name: "Haryanvi (Belt)", speakers: "10M+", engagement: "72", type: "HUB", networkStatus: "DEPLOYABLE", color: "#F39C12", spread: { rx: 30, ry: 25, rotate: -10 } },
-  
-  // MICRO (The Distinct Linguistic Painted Zones > 1M Speakers)
-  { coordinates: [81.5, 24.5] as [number, number], name: "Bagheli", speakers: "8M+", engagement: "97", type: "NODE", networkStatus: "CRITICAL", color: "#9B59B6", spread: { rx: 25, ry: 15, rotate: 20 }, secondaryDialects: [{ name: "Rewa Core", speakers: "3M+" }] },
-  { coordinates: [83.1, 25.6] as [number, number], name: "Bhojpuri", speakers: "50M+", engagement: "96", type: "NODE", networkStatus: "DEPLOYABLE", color: "#F39C12", spread: { rx: 35, ry: 25, rotate: -10 } },
-  { coordinates: [75.5, 26.5] as [number, number], name: "Marwari", speakers: "8M+", engagement: "92", type: "NODE", networkStatus: "DEPLOYABLE", color: "#F1C40F", spread: { rx: 40, ry: 25, rotate: 15 }, secondaryDialects: [{ name: "Mewari Overlap", speakers: "2.1M+" }] },
-  { coordinates: [76.0, 23.5] as [number, number], name: "Malwi", speakers: "5M+", engagement: "94", type: "NODE", networkStatus: "CRITICAL", color: "#16A085", spread: { rx: 25, ry: 20, rotate: -5 } },
-  { coordinates: [79.5, 24.5] as [number, number], name: "Bundeli", speakers: "6M+", engagement: "95", type: "NODE", networkStatus: "CRITICAL", color: "#E67E22", spread: { rx: 30, ry: 20, rotate: 10 } },
-  { coordinates: [81.5, 26.5] as [number, number], name: "Awadhi", speakers: "40M+", engagement: "93", type: "NODE", networkStatus: "DEPLOYABLE", color: "#2ECC71", spread: { rx: 40, ry: 20, rotate: -15 } },
-  { coordinates: [86.5, 26.5] as [number, number], name: "Maithili", speakers: "34M+", engagement: "95", type: "NODE", networkStatus: "DEPLOYABLE", color: "#E74C3C", spread: { rx: 25, ry: 15, rotate: -20 } },
-  { coordinates: [74.5, 18.5] as [number, number], name: "Pune Marathi (Deshi)", speakers: "15M+", engagement: "88", type: "NODE", networkStatus: "CLAIMED", color: "#2980B9", spread: { rx: 25, ry: 35, rotate: 15 } },
-  { coordinates: [79.0, 21.0] as [number, number], name: "Nagpuri Marathi (Varhadi)", speakers: "10M+", engagement: "91", type: "NODE", networkStatus: "CRITICAL", color: "#8E44AD", spread: { rx: 25, ry: 20, rotate: 0 } },
-  { coordinates: [71.5, 22.0] as [number, number], name: "Kathiawadi", speakers: "12M+", engagement: "93", type: "NODE", networkStatus: "DEPLOYABLE", color: "#1ABC9C", spread: { rx: 25, ry: 20, rotate: -10 } },
-  
-  // NEW MASSIVE NODES ADDED
-  { coordinates: [85.5, 24.5] as [number, number], name: "Magahi", speakers: "12.7M+", engagement: "95", type: "NODE", networkStatus: "DEPLOYABLE", color: "#E74C3C", spread: { rx: 35, ry: 25, rotate: 10 } },
-  { coordinates: [74.0, 24.5] as [number, number], name: "Mewari", speakers: "4.2M+", engagement: "94", type: "NODE", networkStatus: "DEPLOYABLE", color: "#F39C12", spread: { rx: 25, ry: 20, rotate: 0 } },
-  { coordinates: [73.5, 23.5] as [number, number], name: "Wagdi", speakers: "3.3M+", engagement: "92", type: "NODE", networkStatus: "DEPLOYABLE", color: "#1ABC9C", spread: { rx: 20, ry: 15, rotate: -15 } },
-  { coordinates: [76.0, 25.0] as [number, number], name: "Harauti", speakers: "2.9M+", engagement: "91", type: "NODE", networkStatus: "DEPLOYABLE", color: "#D35400", spread: { rx: 20, ry: 20, rotate: 0 } },
-  { coordinates: [78.5, 30.2] as [number, number], name: "Garhwali", speakers: "2.5M+", engagement: "96", type: "NODE", networkStatus: "CRITICAL", color: "#3498DB", spread: { rx: 20, ry: 20, rotate: -10 } },
-  { coordinates: [79.8, 29.6] as [number, number], name: "Kumaoni", speakers: "2.0M+", engagement: "95", type: "NODE", networkStatus: "CRITICAL", color: "#2980B9", spread: { rx: 20, ry: 15, rotate: 15 } },
-  { coordinates: [83.5, 21.0] as [number, number], name: "Sambalpuri", speakers: "2.6M+", engagement: "97", type: "NODE", networkStatus: "CRITICAL", color: "#27AE60", spread: { rx: 30, ry: 25, rotate: 20 } },
-  { coordinates: [75.0, 32.7] as [number, number], name: "Dogri", speakers: "2.6M+", engagement: "93", type: "NODE", networkStatus: "DEPLOYABLE", color: "#8E44AD", spread: { rx: 25, ry: 15, rotate: -20 } },
-  { coordinates: [75.0, 21.0] as [number, number], name: "Khandeshi", speakers: "1.8M+", engagement: "90", type: "NODE", networkStatus: "DEPLOYABLE", color: "#E67E22", spread: { rx: 25, ry: 15, rotate: 0 } },
-  { coordinates: [83.0, 23.0] as [number, number], name: "Surgujia", speakers: "1.7M+", engagement: "91", type: "NODE", networkStatus: "DEPLOYABLE", color: "#9B59B6", spread: { rx: 20, ry: 15, rotate: 10 } },
-];
+import { dialectMarkers, DialectMarker } from "@/lib/data";
 
 export default function MarketAnalysisPage() {
   const [mapMode, setMapMode] = useState<"HUB" | "NODE">("HUB");
@@ -283,6 +248,91 @@ export default function MarketAnalysisPage() {
             </div>
           </div>
           
+        </div>
+      </section>
+
+      {/* Audience Intelligence Hub */}
+      <section className="py-24 px-6 bg-black relative border-b border-white/5">
+        <div className="max-w-6xl mx-auto">
+          <div className="flex flex-col md:flex-row justify-between items-end mb-12 gap-6">
+            <div>
+              <h2 className="font-display text-4xl md:text-5xl tracking-widest uppercase text-white hover-glitch" data-text="AUDIENCE INTELLIGENCE">AUDIENCE INTELLIGENCE</h2>
+              <p className="text-secondary font-mono text-sm uppercase tracking-widest mt-2">
+                VERIFIED MARKET DATA FOR {mapMode === "HUB" ? "REGIONAL MACRO-ZONES" : "LINGUISTIC MICRO-NODES"}
+              </p>
+            </div>
+          </div>
+
+          <div className="bg-neutral-950 border border-white/10 rounded-sm overflow-hidden brutalist-border">
+            {/* Table Header */}
+            <div className="hidden md:grid grid-cols-12 gap-4 p-6 border-b border-white/10 bg-black/50 font-mono text-xs uppercase tracking-widest text-neutral-400">
+              <div className="col-span-4">Target Market</div>
+              <div className="col-span-2">Est. TAM</div>
+              <div className="col-span-4">Dense Urban Centers</div>
+              <div className="col-span-2 text-right">Smartphone</div>
+            </div>
+
+            {/* Table Body */}
+            <div className="divide-y divide-white/5">
+              <AnimatePresence mode="popLayout">
+                {activeData.map((marker, index) => (
+                  <motion.div
+                    key={marker.name}
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0 }}
+                    transition={{ delay: index * 0.05 }}
+                    className="grid grid-cols-1 md:grid-cols-12 gap-6 md:gap-4 p-6 items-center hover:bg-white/5 transition-colors group cursor-pointer"
+                    onClick={() => {
+                      setActiveMarker(marker);
+                      window.scrollTo({ top: 0, behavior: 'smooth' });
+                    }}
+                  >
+                    <div className="col-span-1 md:col-span-4">
+                      <div className="font-display text-2xl sm:text-xl text-white group-hover:text-red-accent transition-colors">
+                        {marker.name}
+                      </div>
+                      <div className="text-[10px] font-mono text-secondary uppercase mt-1 flex items-center gap-2">
+                        <span className="w-2 h-2 inline-block rounded-full" style={{ backgroundColor: marker.color }} />
+                        {marker.networkStatus}
+                      </div>
+                    </div>
+                    
+                    <div className="col-span-1 md:col-span-2 font-mono text-xl md:text-lg text-white">
+                      <span className="text-[10px] text-neutral-500 md:hidden block mb-1">EST. TAM</span>
+                      {marker.speakers}
+                    </div>
+
+                    <div className="col-span-1 md:col-span-4 flex flex-wrap gap-2">
+                      <span className="text-[10px] text-neutral-500 md:hidden block w-full mb-1">URBAN CENTERS</span>
+                      {marker.majorCities.map(city => (
+                        <span key={city} className="text-xs font-sans text-secondary bg-white/5 border border-white/10 px-2 py-1 rounded-sm">
+                          {city}
+                        </span>
+                      ))}
+                    </div>
+
+                    <div className="col-span-1 md:col-span-2 flex flex-col justify-center md:items-end gap-2">
+                      <span className="text-[10px] text-neutral-500 md:hidden block mb-1">SMARTPHONE PENETRATION</span>
+                      <div className="font-mono text-lg text-white">
+                        {marker.smartphonePenetration}%
+                      </div>
+                      <div className="w-full md:max-w-[100px] h-1.5 bg-black border border-white/10 overflow-hidden">
+                        <motion.div 
+                          initial={{ width: 0 }}
+                          whileInView={{ width: `${marker.smartphonePenetration}%` }}
+                          viewport={{ once: true }}
+                          transition={{ duration: 1, ease: "easeOut" }}
+                          className="h-full"
+                          style={{ backgroundColor: marker.color }}
+                        />
+                      </div>
+                    </div>
+                  </motion.div>
+                ))}
+              </AnimatePresence>
+            </div>
+          </div>
         </div>
       </section>
     </main>
