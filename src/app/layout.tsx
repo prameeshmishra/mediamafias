@@ -41,7 +41,7 @@ export default function RootLayout({
     "provider": {
       "@type": "Organization",
       "name": "Media Mafias",
-      "url": "https://media-mafias.com" // Placeholder, Vercel will host
+      "url": "https://mediamafias.com" // Domain must match live site exactly
     }
   };
 

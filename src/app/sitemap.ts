@@ -2,7 +2,7 @@ import { MetadataRoute } from 'next'
 import { dialectMarkers } from '@/lib/data'
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = 'https://media-mafias.com' // Using a placeholder for now
+  const baseUrl = 'https://mediamafias.com' // Domain must match GSC exactly
 
   // Core Pages
   const coreRoutes = [
