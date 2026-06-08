@@ -59,7 +59,7 @@ export default function RootLayout({
           <img src="/Logo Main.png" alt="Cartel Watermark" className="w-[80vw] max-w-[800px] h-auto grayscale" />
         </div>
         {children}
-        <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GA_ID || "G-XXXXXXXXXX"} />
+        <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GA_ID || "G-74Y8LVKFN6"} />
       </body>
     </html>
   );
