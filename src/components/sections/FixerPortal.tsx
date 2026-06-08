@@ -69,30 +69,36 @@ export const FixerPortal = () => {
             </div>
           ) : (
             <form onSubmit={handleSubmit} className="space-y-6">
-              <div className="space-y-2">
-                <label className="text-xs font-bold text-neutral-400 uppercase tracking-widest">
-                  Alias / Name
-                </label>
-                <Input required placeholder="Enter your name" />
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div className="space-y-2">
+                  <label className="text-[10px] font-mono text-neutral-400 uppercase tracking-widest">Operative Name</label>
+                  <Input name="name" required placeholder="Full Name" className="bg-neutral-950 border-neutral-800 focus-visible:ring-red-accent" />
+                </div>
+                <div className="space-y-2">
+                  <label className="text-[10px] font-mono text-neutral-400 uppercase tracking-widest">Target Territory</label>
+                  <Input name="city" required placeholder="City or Region" className="bg-neutral-950 border-neutral-800 focus-visible:ring-red-accent" />
+                </div>
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div className="space-y-2">
+                  <label className="text-[10px] font-mono text-neutral-400 uppercase tracking-widest">Comms Link (Email)</label>
+                  <Input name="email" required type="email" placeholder="hello@example.com" className="bg-neutral-950 border-neutral-800 focus-visible:ring-red-accent" />
+                </div>
+                <div className="space-y-2">
+                  <label className="text-[10px] font-mono text-neutral-400 uppercase tracking-widest">Direct Line (Phone)</label>
+                  <Input name="phone" required type="tel" placeholder="+91..." className="bg-neutral-950 border-neutral-800 focus-visible:ring-red-accent" />
+                </div>
               </div>
 
               <div className="space-y-2">
-                <label className="text-xs font-bold text-neutral-400 uppercase tracking-widest">
-                  Location / Base
-                </label>
-                <Input required placeholder="City, Country" />
+                <label className="text-[10px] font-mono text-neutral-400 uppercase tracking-widest">Broadcast History</label>
+                <Input name="experience" required placeholder="Ex: RJ at Red FM (3 Years)" className="bg-neutral-950 border-neutral-800 focus-visible:ring-red-accent" />
               </div>
 
               <div className="space-y-2">
-                <label className="text-xs font-bold text-neutral-400 uppercase tracking-widest">
-                  Why is broadcast obsolete?
-                </label>
-                <textarea 
-                  required
-                  rows={4}
-                  className="flex w-full rounded-sm border border-neutral-800 bg-neutral-950 px-3 py-2 text-sm text-white placeholder:text-neutral-500 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-red-accent resize-none"
-                  placeholder="Share your perspective..."
-                />
+                <label className="text-[10px] font-mono text-neutral-400 uppercase tracking-widest">LinkedIn Profile</label>
+                <Input name="linkedin" required type="url" placeholder="https://linkedin.com/in/..." className="bg-neutral-950 border-neutral-800 focus-visible:ring-red-accent" />
               </div>
 
               <Button 
