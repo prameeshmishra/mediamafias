@@ -470,6 +470,98 @@ export default function PartnerPage() {
         </div>
       </section>
 
+      {/* Scope of Work / Division of Labor */}
+      <section className="py-24 px-6 border-b border-white/5 bg-neutral-950 relative">
+        <div className="max-w-6xl mx-auto">
+          <div className="text-center mb-16">
+            <h2 className="font-display text-4xl md:text-5xl tracking-widest uppercase text-white hover-glitch" data-text="SCOPE OF WORK">SCOPE OF WORK</h2>
+            <p className="text-secondary font-mono text-sm uppercase tracking-widest mt-4">
+              The Protocol: Who Does What
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-px bg-white/10 border border-white/10 brutalist-border">
+            
+            {/* Media Mafias Side */}
+            <div className="bg-black p-8 md:p-12 relative group hover:bg-neutral-950 transition-colors">
+              <div className="absolute top-0 left-0 w-full h-1 bg-white/20 group-hover:bg-white/50 transition-colors" />
+              <h3 className="font-display text-3xl tracking-widest uppercase text-white mb-8 border-b border-white/10 pb-4">
+                What Media Mafias<br/><span className="text-secondary text-xl">Deploys</span>
+              </h3>
+              <ul className="space-y-6">
+                <li className="flex items-start gap-4">
+                  <div className="text-white mt-1">»</div>
+                  <div>
+                    <h4 className="font-mono text-sm text-white uppercase tracking-widest mb-1">MafiaOS Infrastructure</h4>
+                    <p className="text-secondary font-sans text-sm leading-relaxed">Full access to the Radio 3.0 SaaS cloud platform, auto-scheduling algorithms, and streaming server bandwidth.</p>
+                  </div>
+                </li>
+                <li className="flex items-start gap-4">
+                  <div className="text-white mt-1">»</div>
+                  <div>
+                    <h4 className="font-mono text-sm text-white uppercase tracking-widest mb-1">Music & Content Licensing</h4>
+                    <p className="text-secondary font-sans text-sm leading-relaxed">We handle the legal overhead, providing a vast catalog of cleared regional music and AI-generated content blocks.</p>
+                  </div>
+                </li>
+                <li className="flex items-start gap-4">
+                  <div className="text-white mt-1">»</div>
+                  <div>
+                    <h4 className="font-mono text-sm text-white uppercase tracking-widest mb-1">Network Ad Injections</h4>
+                    <p className="text-secondary font-sans text-sm leading-relaxed">Programmatic routing of national brand campaigns directly into your station's free commercial time (FCT).</p>
+                  </div>
+                </li>
+                <li className="flex items-start gap-4">
+                  <div className="text-white mt-1">»</div>
+                  <div>
+                    <h4 className="font-mono text-sm text-white uppercase tracking-widest mb-1">Listener Applications</h4>
+                    <p className="text-secondary font-sans text-sm leading-relaxed">Your station is instantly broadcasted on the global Media Mafias consumer app and web portals.</p>
+                  </div>
+                </li>
+              </ul>
+            </div>
+
+            {/* Partner Side */}
+            <div className="bg-black p-8 md:p-12 relative group hover:bg-neutral-950 transition-colors">
+              <div className="absolute top-0 left-0 w-full h-1 bg-red-accent/30 group-hover:bg-red-accent transition-colors" />
+              <h3 className="font-display text-3xl tracking-widest uppercase text-white mb-8 border-b border-white/10 pb-4">
+                What You<br/><span className="text-red-accent text-xl">Command</span>
+              </h3>
+              <ul className="space-y-6">
+                <li className="flex items-start gap-4">
+                  <div className="text-red-accent mt-1">»</div>
+                  <div>
+                    <h4 className="font-mono text-sm text-white uppercase tracking-widest mb-1">Hyper-Local Sales</h4>
+                    <p className="text-secondary font-sans text-sm leading-relaxed">You own the street. Pitch local businesses, close direct ad deals, and keep up to 80% of the revenue.</p>
+                  </div>
+                </li>
+                <li className="flex items-start gap-4">
+                  <div className="text-red-accent mt-1">»</div>
+                  <div>
+                    <h4 className="font-mono text-sm text-white uppercase tracking-widest mb-1">Cultural Curation</h4>
+                    <p className="text-secondary font-sans text-sm leading-relaxed">You manage the vibe. Hire local RJs, curate regional folk music, and ensure the broadcast bleeds local culture.</p>
+                  </div>
+                </li>
+                <li className="flex items-start gap-4">
+                  <div className="text-red-accent mt-1">»</div>
+                  <div>
+                    <h4 className="font-mono text-sm text-white uppercase tracking-widest mb-1">Ground Marketing</h4>
+                    <p className="text-secondary font-sans text-sm leading-relaxed">Execute local PR, events, and billboard campaigns to dominate your dialect's listener acquisition.</p>
+                  </div>
+                </li>
+                <li className="flex items-start gap-4">
+                  <div className="text-red-accent mt-1">»</div>
+                  <div>
+                    <h4 className="font-mono text-sm text-white uppercase tracking-widest mb-1">Creator Scouting</h4>
+                    <p className="text-secondary font-sans text-sm leading-relaxed">Onboard underground talent from your region into the ecosystem to build a fiercely loyal listener base.</p>
+                  </div>
+                </li>
+              </ul>
+            </div>
+
+          </div>
+        </div>
+      </section>
+
       {/* Cartel Membership Profile */}
       <section className="py-32 px-6 border-b border-white/5 bg-black relative overflow-hidden">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(192,57,43,0.08)_0%,transparent_60%)] pointer-events-none" />
