@@ -38,31 +38,31 @@ export default function CreatorProgramPage() {
         </motion.div>
       </section>
 
-      {/* The Vision Section (PM Modi) */}
+      {/* The Vision Section (Neutral Alignment) */}
       <section className="py-24 px-6 relative bg-neutral-950 border-b border-white/5">
         <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
           
-          {/* Portrait Column */}
+          {/* Typography Graphic Column */}
           <motion.div 
             initial={{ opacity: 0, x: -30 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             className="lg:col-span-5 relative"
           >
-            <div className="relative p-2 border border-white/10 bg-black brutalist-border shadow-[0_0_50px_rgba(192,57,43,0.1)] group">
+            <div className="relative p-12 border border-white/10 bg-black brutalist-border shadow-[0_0_50px_rgba(192,57,43,0.1)] group overflow-hidden min-h-[400px] flex flex-col justify-center">
+              {/* Decorative dotted background */}
+              <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyMCIgaGVpZ2h0PSIyMCI+CjxjaXJjbGUgY3g9IjIiIGN5PSIyIiByPSIyIiBmaWxsPSJyZ2JhKDI1NSwyNTUsMjU1LDAuMDUpIi8+Cjwvc3ZnPg==')] pointer-events-none opacity-50 transition-opacity group-hover:opacity-100" />
+              
               <div className="absolute top-0 left-0 w-8 h-8 border-t-2 border-l-2 border-red-accent z-20" />
               <div className="absolute bottom-0 right-0 w-8 h-8 border-b-2 border-r-2 border-red-accent z-20" />
               
-              <div className="relative aspect-[3/4] w-full overflow-hidden bg-neutral-900 grayscale group-hover:grayscale-0 transition-all duration-700">
-                <Image 
-                  src="/Modi-Ji-Photo-02-e1647325936821.jpg"
-                  alt="Honorable Prime Minister of India, Narendra Modi"
-                  fill
-                  className="object-cover object-top opacity-90 group-hover:opacity-100 transition-opacity"
-                  unoptimized
-                />
+              <div className="relative z-10">
+                <h3 className="font-display text-5xl md:text-6xl uppercase leading-[0.9] text-white">
+                  THE NEW<br/><span className="text-red-accent">STORY<br/>TELLERS</span>
+                </h3>
               </div>
-              <div className="absolute -bottom-4 -right-4 bg-red-accent text-white font-mono text-[10px] px-3 py-1 tracking-widest uppercase">
+              
+              <div className="absolute -bottom-4 -right-4 bg-red-accent text-white font-mono text-[10px] px-3 py-1 tracking-widest uppercase z-20">
                 NATIONAL VISION
               </div>
             </div>
@@ -78,20 +78,20 @@ export default function CreatorProgramPage() {
             <div className="space-y-4 relative">
               <span className="absolute -top-16 -left-8 text-[120px] font-display text-white/5 leading-none select-none">"</span>
               <blockquote className="font-display text-3xl md:text-5xl uppercase leading-snug text-white relative z-10">
-                Creators are the new storytellers of India. You are shaping the future of our digital identity.
+                Creators are shaping the future of India's digital identity.
               </blockquote>
               <div className="flex items-center gap-4 pt-4 border-t border-red-accent/30 w-full">
                 <div className="w-12 h-px bg-red-accent shrink-0" />
                 <div className="font-mono text-sm tracking-widest text-red-accent uppercase space-y-1">
-                  <p className="font-bold text-white text-base">Shri Narendra Damodardas Modi</p>
-                  <p>Hon&apos;ble Prime Minister of India</p>
+                  <p className="font-bold text-white text-base">National Vision Alignment</p>
+                  <p>Empowering The Creator Economy</p>
                 </div>
               </div>
             </div>
 
             <div className="pt-8 space-y-6 text-secondary font-sans text-lg leading-relaxed border-l-2 border-white/10 pl-6">
               <p>
-                As envisioned by the Honorable Prime Minister, the Creator Economy is not just a trend—it is the digital backbone of a modern India. At Media Mafias, we are directly executing this mandate.
+                Aligned with the National Vision for India's Creator Economy to preserve and digitize hyper-local vernacular talent and folk music.
               </p>
               <p>
                 We believe that true cultural impact happens when local talent is given access to world-class tools. Our Creator Program doesn&apos;t just host audio; it actively trains, equips, and transforms grassroots artists into professional digital broadcasters.
@@ -107,7 +107,7 @@ export default function CreatorProgramPage() {
                 <div className="flex items-center justify-center h-16 px-6 bg-white/5 border border-white/10 rounded group hover:bg-white/10 transition-colors">
                   <div className="font-display text-center">
                     <span className="font-bold text-white text-lg tracking-widest uppercase block leading-none">Make In India</span>
-                    <span className="text-[8px] uppercase tracking-widest text-secondary mt-1 block">Government of India</span>
+                    <span className="text-[8px] uppercase tracking-widest text-secondary mt-1 block">National Initiative</span>
                   </div>
                 </div>
               </div>

@@ -22,41 +22,37 @@ export const Academy = () => {
 
         <div className="grid lg:grid-cols-12 gap-12 items-stretch">
           
-          {/* PM Modi Vision Card */}
+          {/* Vision Statement Graphic Card */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8 }}
-            className="lg:col-span-5 flex flex-col justify-between border border-white/10 bg-neutral-950 p-8 brutalist-border relative group"
+            className="lg:col-span-5 flex flex-col justify-between border border-white/10 bg-neutral-950 p-8 brutalist-border relative group overflow-hidden"
           >
+            {/* Background Graphic Element */}
+            <div className="absolute top-0 right-0 w-64 h-64 bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyMCIgaGVpZ2h0PSIyMCI+CjxjaXJjbGUgY3g9IjIiIGN5PSIyIiByPSIyIiBmaWxsPSJyZ2JhKDI1NSwyNTUsMjU1LDAuMDMpIi8+Cjwvc3ZnPg==')] pointer-events-none opacity-50 mix-blend-screen transition-opacity group-hover:opacity-100" />
             <div className="absolute top-4 right-4 text-white/5">
               <Quote className="w-24 h-24" />
             </div>
             
             <div className="relative z-10 space-y-6">
-              <p className="font-sans text-xl md:text-2xl leading-relaxed text-white font-light italic">
-                "Creators are the new storytellers of India. You are shaping the future of our digital identity."
-              </p>
-              
-              <div className="flex items-center gap-4 pt-6 border-t border-white/10">
-                <div className="w-16 h-16 rounded-full overflow-hidden border-2 border-red-accent bg-black shrink-0">
-                  <img 
-                    src="/Modi-Ji-Photo-02-e1647325936821.jpg" 
-                    alt="PM Narendra Modi" 
-                    className="w-full h-full object-cover object-top"
-                  />
-                </div>
-                <div>
-                  <h4 className="font-display tracking-widest uppercase text-white">Shri Narendra Damodardas Modi</h4>
-                  <p className="font-mono text-xs text-red-accent uppercase tracking-widest mt-1">Hon'ble Prime Minister of India</p>
-                </div>
+              <div className="inline-flex items-center gap-3 border border-red-accent/30 bg-red-accent/5 px-4 py-1.5 mb-2">
+                <span className="text-red-accent font-mono text-[10px] tracking-widest uppercase">
+                  National Vision Alignment
+                </span>
               </div>
+              <h3 className="font-display text-4xl md:text-5xl uppercase leading-none text-white pt-2">
+                THE NEW<br/><span className="text-red-accent">STORYTELLERS</span>
+              </h3>
+              <p className="font-sans text-lg md:text-xl leading-relaxed text-secondary border-l-2 border-white/10 pl-4 mt-6">
+                Aligned with the National Vision for India's Creator Economy to preserve and digitize hyper-local vernacular talent and folk music.
+              </p>
             </div>
             
-            <div className="mt-12">
+            <div className="mt-12 pt-6 border-t border-white/10">
               <p className="font-mono text-sm text-secondary leading-relaxed">
-                Aligned with the national vision for the Creator Economy, Media Mafias is building the infrastructure to empower local vernacular creators at scale.
+                Media Mafias is building the infrastructure to empower local creators at scale, equipping them with world-class tools to shape the future of our digital identity.
               </p>
             </div>
           </motion.div>
