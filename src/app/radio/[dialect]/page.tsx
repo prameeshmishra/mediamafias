@@ -6,9 +6,9 @@ import { Metadata } from "next";
 
 // Define the interface for the params
 interface PageProps {
-  params: {
+  params: Promise<{
     dialect: string;
-  };
+  }>;
 }
 
 // Generate Static Params for all dialects to pre-build the pages
@@ -20,7 +20,8 @@ export async function generateStaticParams() {
 
 // Generate Dynamic SEO Metadata
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
-  const dialectParam = params.dialect;
+  const resolvedParams = await params;
+  const dialectParam = resolvedParams.dialect;
   const marker = dialectMarkers.find(
     (m) => m.name.toLowerCase().replace(/[\s\(\)]+/g, "-").replace(/-+$/, "") === dialectParam
   );
@@ -47,8 +48,9 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   };
 }
 
-export default function DialectRadioPage({ params }: PageProps) {
-  const dialectParam = params.dialect;
+export default async function DialectRadioPage({ params }: PageProps) {
+  const resolvedParams = await params;
+  const dialectParam = resolvedParams.dialect;
   const marker = dialectMarkers.find(
     (m) => m.name.toLowerCase().replace(/[\s\(\)]+/g, "-").replace(/-+$/, "") === dialectParam
   );
