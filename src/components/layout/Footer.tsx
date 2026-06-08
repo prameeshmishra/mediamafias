@@ -31,6 +31,7 @@ export const Footer = () => {
           <h4 className="font-display text-xl tracking-widest text-red-accent uppercase">Access Points</h4>
           <ul className="space-y-4 font-mono text-sm uppercase tracking-widest text-secondary">
             <li><Link href="/" className="hover:text-white transition-all">Home</Link></li>
+            <li><Link href="/business" className="hover:text-red-accent transition-colors">Business</Link></li>
             <li><Link href="/radio" className="hover:text-red-accent transition-colors">Future Radio</Link></li>
             <li><Link href="/technology" className="hover:text-red-accent transition-colors">Technology</Link></li>
             <li><Link href="/partner" className="hover:text-red-accent transition-colors">Station Partner</Link></li>

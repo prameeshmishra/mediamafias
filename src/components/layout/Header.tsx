@@ -14,6 +14,7 @@ export const Header = () => {
   const links: { name: string; href: string; external?: boolean }[] = [
     { name: "Future Radio", href: "/radio" },
     { name: "Technology", href: "/technology" },
+    { name: "Business", href: "/business" },
     { name: "Partner", href: "/partner" },
     { name: "Creator Program", href: "/create" },
     { name: "Market Analysis", href: "/analysis" },
