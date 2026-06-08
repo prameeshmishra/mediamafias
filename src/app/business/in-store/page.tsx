@@ -106,9 +106,10 @@ export default function InStorePage() {
                 <p className="font-mono text-[10px] uppercase tracking-widest opacity-80 mb-6 min-h-[30px]">
                   {tier.description}
                 </p>
-                <div className="mb-8">
-                  <span className="font-display text-4xl">₹{tier.price}</span>
-                  <span className="font-mono text-xs opacity-80 uppercase tracking-widest"> / month</span>
+                <div className="mb-8 flex items-baseline">
+                  <span className="font-sans text-3xl font-bold mr-1">₹</span>
+                  <span className="font-display text-5xl">{tier.price}</span>
+                  <span className="font-mono text-xs opacity-80 uppercase tracking-widest ml-2">/ month</span>
                 </div>
                 
                 <div className="flex-grow">
@@ -126,7 +127,15 @@ export default function InStorePage() {
                 </div>
 
                 <Button 
-                  className={`w-full mt-auto ${tier.name === 'BRANDED HUB' ? 'bg-black text-white hover:bg-white hover:text-black' : 'bg-white text-black hover:bg-red-accent hover:text-white border-black'}`}
+                  className={`w-full mt-auto border-2 rounded-none font-mono tracking-widest transition-all ${
+                    tier.name === 'BRANDED HUB' 
+                      ? 'bg-black text-white hover:bg-white hover:text-black border-black' 
+                      : tier.name === 'BASIC PROTOCOL'
+                        ? 'bg-transparent text-black border-black hover:bg-black hover:text-white'
+                        : tier.name === 'INDIE DOMINANCE'
+                          ? 'bg-transparent text-white border-white hover:bg-white hover:text-black'
+                          : 'bg-transparent text-red-accent border-red-accent hover:bg-red-accent hover:text-black'
+                  }`}
                   onClick={() => window.location.href = '/contact'}
                 >
                   INITIALIZE {tier.name}
