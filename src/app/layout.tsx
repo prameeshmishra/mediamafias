@@ -18,6 +18,8 @@ const jetbrainsMono = JetBrains_Mono({
   subsets: ["latin"],
 });
 
+import { GoogleAnalytics } from '@next/third-parties/google';
+
 export const metadata: Metadata = {
   title: "Media Mafias | Radio Streaming Software Technology Provider",
   description: "The future of radio is here. Media Mafias provides Radio as SaaS, digital audio solutions, and streaming software technology for the Indian radio business.",
@@ -57,6 +59,7 @@ export default function RootLayout({
           <img src="/Logo Main.png" alt="Cartel Watermark" className="w-[80vw] max-w-[800px] h-auto grayscale" />
         </div>
         {children}
+        <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GA_ID || "G-XXXXXXXXXX"} />
       </body>
     </html>
   );
