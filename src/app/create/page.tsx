@@ -176,6 +176,128 @@ export default function CreatorProgramPage() {
         </div>
       </section>
 
+      {/* Application Form Section */}
+      <section className="py-24 px-6 relative bg-neutral-950 border-t border-white/5" id="apply">
+        <div className="max-w-4xl mx-auto">
+          <div className="text-center mb-16">
+            <div className="inline-flex items-center gap-3 border border-red-accent/30 bg-red-accent/5 px-4 py-1.5 mb-6">
+              <span className="text-red-accent font-mono text-xs tracking-widest uppercase">
+                Media Mafias Academy
+              </span>
+            </div>
+            <h2 className="font-display text-4xl md:text-5xl tracking-widest uppercase text-white mb-4">
+              JOIN THE REVOLUTION
+            </h2>
+            <p className="text-secondary font-mono text-sm max-w-2xl mx-auto leading-relaxed">
+              Register for our Skill Development Center. We are empowering local artists to become global voices. Submit your details below to begin your transformation.
+            </p>
+          </div>
+
+          <form 
+            className="space-y-8 bg-black p-8 md:p-12 border border-white/10 relative group"
+            onSubmit={(e) => {
+              e.preventDefault();
+              alert("APPLICATION PROTOCOL INITIATED. We will contact you shortly.");
+            }}
+          >
+            {/* Corner accents */}
+            <div className="absolute top-0 left-0 w-4 h-4 border-t-2 border-l-2 border-red-accent/50 group-hover:border-red-accent transition-colors" />
+            <div className="absolute bottom-0 right-0 w-4 h-4 border-b-2 border-r-2 border-red-accent/50 group-hover:border-red-accent transition-colors" />
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+              <div className="space-y-2">
+                <label className="font-mono text-xs text-secondary tracking-widest uppercase">Full Name [Legal]</label>
+                <input 
+                  type="text" 
+                  required
+                  className="w-full bg-neutral-950 border border-white/10 px-4 py-3 text-white font-sans focus:outline-none focus:border-red-accent transition-colors"
+                  placeholder="Enter your name"
+                />
+              </div>
+              <div className="space-y-2">
+                <label className="font-mono text-xs text-secondary tracking-widest uppercase">Stage Name / Artist Alias</label>
+                <input 
+                  type="text" 
+                  className="w-full bg-neutral-950 border border-white/10 px-4 py-3 text-white font-sans focus:outline-none focus:border-red-accent transition-colors"
+                  placeholder="Optional"
+                />
+              </div>
+
+              <div className="space-y-2">
+                <label className="font-mono text-xs text-secondary tracking-widest uppercase">Email Address</label>
+                <input 
+                  type="email" 
+                  required
+                  className="w-full bg-neutral-950 border border-white/10 px-4 py-3 text-white font-sans focus:outline-none focus:border-red-accent transition-colors"
+                  placeholder="transmission@email.com"
+                />
+              </div>
+              <div className="space-y-2">
+                <label className="font-mono text-xs text-secondary tracking-widest uppercase">Phone Number</label>
+                <input 
+                  type="tel" 
+                  required
+                  className="w-full bg-neutral-950 border border-white/10 px-4 py-3 text-white font-sans focus:outline-none focus:border-red-accent transition-colors"
+                  placeholder="+91"
+                />
+              </div>
+
+              <div className="space-y-2">
+                <label className="font-mono text-xs text-secondary tracking-widest uppercase">City & State (Local Dialect)</label>
+                <input 
+                  type="text" 
+                  required
+                  className="w-full bg-neutral-950 border border-white/10 px-4 py-3 text-white font-sans focus:outline-none focus:border-red-accent transition-colors"
+                  placeholder="e.g. Rewa, MP (Bagheli)"
+                />
+              </div>
+              <div className="space-y-2">
+                <label className="font-mono text-xs text-secondary tracking-widest uppercase">Primary Skill</label>
+                <select 
+                  required
+                  className="w-full bg-neutral-950 border border-white/10 px-4 py-3 text-white font-sans focus:outline-none focus:border-red-accent transition-colors appearance-none"
+                >
+                  <option value="" disabled selected>Select an option</option>
+                  <option value="singer">Singer / Musician</option>
+                  <option value="rj">Radio Jockey / Voice Over</option>
+                  <option value="producer">Music Producer / Beatmaker</option>
+                  <option value="writer">Lyricist / Writer</option>
+                  <option value="other">Other</option>
+                </select>
+              </div>
+            </div>
+
+            <div className="space-y-2">
+              <label className="font-mono text-xs text-secondary tracking-widest uppercase">Portfolio / Social Media Link</label>
+              <input 
+                type="url" 
+                className="w-full bg-neutral-950 border border-white/10 px-4 py-3 text-white font-sans focus:outline-none focus:border-red-accent transition-colors"
+                placeholder="https://instagram.com/..."
+              />
+            </div>
+
+            <div className="space-y-2">
+              <label className="font-mono text-xs text-secondary tracking-widest uppercase">Why do you want to join the Academy?</label>
+              <textarea 
+                required
+                rows={4}
+                className="w-full bg-neutral-950 border border-white/10 px-4 py-3 text-white font-sans focus:outline-none focus:border-red-accent transition-colors resize-none"
+                placeholder="Tell us about your cultural roots and global ambitions..."
+              ></textarea>
+            </div>
+
+            <div className="pt-4 border-t border-white/5">
+              <button 
+                type="submit"
+                className="w-full bg-red-accent hover:bg-white text-white hover:text-black font-display text-xl tracking-widest uppercase py-4 transition-all duration-300"
+              >
+                Submit Application
+              </button>
+            </div>
+          </form>
+        </div>
+      </section>
+
       <Footer />
     </main>
   );
