@@ -8,6 +8,7 @@ import Image from "next/image";
 
 export const Hero = () => {
   const [matrixText, setMatrixText] = React.useState("");
+  const [isPlaying, setIsPlaying] = React.useState(false);
   
   React.useEffect(() => {
     const chars = "01ABCDEFGHIJKLMNOPQRSTUVWXYZ01";
@@ -21,6 +22,30 @@ export const Hero = () => {
     }, 50);
     return () => clearInterval(interval);
   }, []);
+
+  const handlePlayAudio = () => {
+    if (isPlaying) return;
+    setIsPlaying(true);
+    
+    // Placeholder audio using Web Speech API for immediate feedback
+    if (typeof window !== "undefined" && "speechSynthesis" in window) {
+      // Cancel any ongoing speech
+      window.speechSynthesis.cancel();
+      
+      const msg = new SpeechSynthesisUtterance("Experience the product live on the future radio dot com.");
+      msg.pitch = 0.6; // Deep voice
+      msg.rate = 0.9;
+      msg.volume = 1;
+      
+      msg.onend = () => setIsPlaying(false);
+      msg.onerror = () => setIsPlaying(false);
+      
+      window.speechSynthesis.speak(msg);
+    } else {
+      // Fallback if TTS not supported
+      setTimeout(() => setIsPlaying(false), 4000);
+    }
+  };
 
   return (
     <section className="relative min-h-[100vh] flex flex-col items-center justify-center pt-20 overflow-hidden bg-black border-b border-red-accent/10">
@@ -109,12 +134,19 @@ export const Hero = () => {
           initial={{ opacity: 0, scale: 0.9, x: 30 }}
           animate={{ opacity: 1, scale: 1, x: 0 }}
           transition={{ duration: 1, delay: 0.4, ease: "easeOut" }}
-          className="lg:col-span-5 hidden lg:flex justify-center items-center relative"
+          className="lg:col-span-5 hidden lg:flex justify-center items-center relative cursor-pointer group"
+          onClick={handlePlayAudio}
         >
           {/* Rotating radar/scanning effect behind logo */}
           <motion.div 
-            animate={{ rotate: 360 }}
-            transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
+            animate={{ 
+              rotate: 360,
+              scale: isPlaying ? [1, 1.1, 1] : 1
+            }}
+            transition={{ 
+              rotate: { duration: 20, repeat: Infinity, ease: "linear" },
+              scale: { duration: 0.3, repeat: isPlaying ? Infinity : 0 }
+            }}
             className="absolute inset-0 border border-red-accent/10 rounded-full w-[400px] h-[400px] m-auto border-t-red-accent/40"
           />
           <motion.div 
@@ -123,15 +155,55 @@ export const Hero = () => {
             className="absolute inset-0 border border-white/5 rounded-full w-[350px] h-[350px] m-auto border-b-white/20"
           />
           
-          <div className="relative z-10 mix-blend-screen drop-shadow-[0_0_30px_rgba(192,57,43,0.4)]">
-            <Image 
-              src="/player-logo.png" 
-              alt="Media Mafias Cartel Player" 
-              width={280} 
-              height={280} 
-              className="object-contain drop-shadow-2xl"
-              priority
-            />
+          <div className="relative z-10 flex items-center justify-center w-[300px] h-[300px]">
+            {/* Naked Hi-Fi Speaker Transformation */}
+            <motion.div
+               initial={false}
+               animate={{ 
+                 opacity: isPlaying ? 1 : 0, 
+                 scale: isPlaying ? 1 : 0.2 
+               }}
+               transition={{ duration: 0.4, type: "spring", bounce: 0.4 }}
+               className="absolute inset-0 rounded-full bg-neutral-900 border-[16px] border-[#050505] shadow-[inset_0_20px_50px_rgba(0,0,0,0.9),_0_0_60px_rgba(192,57,43,0.4)] flex items-center justify-center overflow-hidden"
+            >
+               {/* Pumping Speaker Cone */}
+               <motion.div 
+                 animate={isPlaying ? { scale: [1, 1.05, 1, 1.08, 1] } : { scale: 1 }}
+                 transition={{ duration: 0.4, repeat: isPlaying ? Infinity : 0, ease: "easeInOut" }}
+                 className="w-[90%] h-[90%] rounded-full bg-[radial-gradient(circle_at_center,#333_0%,#0a0a0a_80%)] shadow-[inset_0_0_40px_rgba(0,0,0,1)] flex items-center justify-center border-[6px] border-[#111]"
+               >
+                 {/* Inner Rubber Surround */}
+                 <div className="w-[85%] h-[85%] rounded-full shadow-[inset_0_10px_20px_rgba(0,0,0,0.8)] border border-white/5 bg-[radial-gradient(circle_at_center,#1a1a1a_0%,#000_100%)] flex items-center justify-center" />
+               </motion.div>
+            </motion.div>
+
+            {/* The Actual Logo (Acts as Dust Cap when playing) */}
+            <motion.div
+              animate={{ 
+                scale: isPlaying ? 0.35 : 1, 
+              }}
+              transition={{ duration: 0.4, type: "spring", bounce: 0.3 }}
+              className={`relative z-20 flex flex-col items-center justify-center transition-all ${
+                isPlaying 
+                  ? 'mix-blend-normal drop-shadow-[0_0_10px_rgba(0,0,0,0.8)]' 
+                  : 'mix-blend-screen drop-shadow-[0_0_30px_rgba(192,57,43,0.4)] group-hover:scale-110'
+              }`}
+            >
+              <Image 
+                src="/player-logo.png" 
+                alt="Media Mafias Cartel Player" 
+                width={240} 
+                height={240} 
+                className="object-contain drop-shadow-2xl"
+                priority
+              />
+
+              {!isPlaying && (
+                <div className="absolute -bottom-10 whitespace-nowrap text-[10px] font-mono text-red-accent/80 tracking-[0.3em] uppercase opacity-0 group-hover:opacity-100 transition-opacity duration-300 animate-pulse">
+                  [ Click to Ignite ]
+                </div>
+              )}
+            </motion.div>
           </div>
         </motion.div>
       </div>
