@@ -32,7 +32,8 @@ export default function RadioPage() {
               THE NEW AGE <span className="text-red-accent">NETWORK</span>
             </h1>
             <p className="text-xl md:text-2xl text-secondary font-sans max-w-3xl mx-auto leading-relaxed">
-              Digital India&apos;s #1 Digital Audio Network.
+              Future Radio is an autonomous AI-curated audio engine targeting hyper-local vernacular segments. <br/><br/>
+              <span className="text-white font-bold">Digital India&apos;s #1 Digital & Virtual Radio Network.</span>
             </p>
           </motion.div>
           
