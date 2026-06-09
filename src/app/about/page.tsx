@@ -54,7 +54,7 @@ export default function AboutPage() {
             >
               <h2 className="font-display text-3xl text-red-accent uppercase tracking-widest">Our Vision</h2>
               <p className="text-secondary font-sans leading-relaxed text-lg">
-                A total decentralization of the global audio landscape. We envision a world where localized culture and indie creators deploy their own 24/7 high-fidelity stations, completely immune to corporate dilution. The era of static frequencies is dead. We are writing the new algorithms for global radio.
+                A total decentralization of the global audio landscape. We envision a world where localized culture and indie creators deploy their own 24/7 high-fidelity stations, completely immune to corporate dilution. The era of static frequencies is dead. We are writing the new algorithms for global audio.
               </p>
             </motion.div>
           </div>
