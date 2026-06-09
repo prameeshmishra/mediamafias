@@ -9,6 +9,7 @@ import Image from "next/image";
 export const Hero = () => {
   const [matrixText, setMatrixText] = React.useState("");
   const [isPlaying, setIsPlaying] = React.useState(false);
+  const audioRef = React.useRef<HTMLAudioElement | null>(null);
   
   React.useEffect(() => {
     const chars = "01ABCDEFGHIJKLMNOPQRSTUVWXYZ01";
@@ -20,31 +21,30 @@ export const Hero = () => {
       iterations++;
       if (iterations > 100) clearInterval(interval);
     }, 50);
-    return () => clearInterval(interval);
+
+    // Initialize audio object
+    if (typeof window !== "undefined") {
+      audioRef.current = new Audio("/Latency Buffering.mp3");
+      audioRef.current.onended = () => setIsPlaying(false);
+    }
+
+    return () => {
+      clearInterval(interval);
+      if (audioRef.current) {
+        audioRef.current.pause();
+      }
+    };
   }, []);
 
   const handlePlayAudio = () => {
-    if (isPlaying) return;
-    setIsPlaying(true);
+    if (isPlaying || !audioRef.current) return;
     
-    // Placeholder audio using Web Speech API for immediate feedback
-    if (typeof window !== "undefined" && "speechSynthesis" in window) {
-      // Cancel any ongoing speech
-      window.speechSynthesis.cancel();
-      
-      const msg = new SpeechSynthesisUtterance("Experience the product live on the future radio dot com.");
-      msg.pitch = 0.6; // Deep voice
-      msg.rate = 0.9;
-      msg.volume = 1;
-      
-      msg.onend = () => setIsPlaying(false);
-      msg.onerror = () => setIsPlaying(false);
-      
-      window.speechSynthesis.speak(msg);
-    } else {
-      // Fallback if TTS not supported
-      setTimeout(() => setIsPlaying(false), 4000);
-    }
+    setIsPlaying(true);
+    audioRef.current.currentTime = 0;
+    audioRef.current.play().catch(err => {
+      console.error("Audio playback blocked by browser:", err);
+      setIsPlaying(false);
+    });
   };
 
   return (
