@@ -2,7 +2,6 @@
 
 import * as React from "react";
 import { motion } from "framer-motion";
-import { Turnstile } from "@marsidev/react-turnstile";
 import Image from "next/image";
 
 interface EntryDoorProps {
@@ -10,6 +9,20 @@ interface EntryDoorProps {
 }
 
 export const EntryDoor: React.FC<EntryDoorProps> = ({ onVerified }) => {
+  const [status, setStatus] = React.useState("Awaiting Human Signature...");
+
+  React.useEffect(() => {
+    const timer1 = setTimeout(() => setStatus("Decrypting Protocols..."), 800);
+    const timer2 = setTimeout(() => setStatus("Secure Connection Established."), 1600);
+    const timer3 = setTimeout(() => onVerified(), 2200);
+    
+    return () => {
+      clearTimeout(timer1);
+      clearTimeout(timer2);
+      clearTimeout(timer3);
+    };
+  }, [onVerified]);
+
   return (
     <motion.div 
       initial={{ opacity: 0 }}
@@ -37,26 +50,29 @@ export const EntryDoor: React.FC<EntryDoorProps> = ({ onVerified }) => {
           {/* Scanning line effect */}
           <motion.div
             animate={{ top: ["0%", "100%", "0%"] }}
-            transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
+            transition={{ duration: 1.5, repeat: Infinity, ease: "linear" }}
             className="absolute left-0 w-full h-[2px] bg-red-accent shadow-[0_0_10px_rgba(192,57,43,1)] z-20"
           />
         </div>
         
         <div className="space-y-4">
           <h1 className="font-display text-4xl tracking-widest uppercase text-red-accent hover-glitch" data-text="Restricted Access">Restricted Access</h1>
-          <p className="text-secondary font-mono text-xs uppercase tracking-widest">Establish secure connection to enter the Cartel</p>
+          <p className="text-secondary font-mono text-xs uppercase tracking-widest">Entering the Cartel Network</p>
         </div>
 
-        <div className="p-4 border border-white/10 bg-neutral-950/50 backdrop-blur-sm rounded-sm">
-          <Turnstile 
-            siteKey="1x00000000000000000000AA"
-            onSuccess={onVerified}
-            options={{ theme: "dark" }}
-          />
+        <div className="p-4 border border-white/10 bg-neutral-950/50 backdrop-blur-sm rounded-sm min-w-[250px]">
+          <div className="w-full h-1 bg-neutral-900 rounded-full overflow-hidden">
+            <motion.div 
+              initial={{ width: "0%" }}
+              animate={{ width: "100%" }}
+              transition={{ duration: 2.2, ease: "easeInOut" }}
+              className="h-full bg-red-accent shadow-[0_0_10px_rgba(192,57,43,1)]"
+            />
+          </div>
         </div>
         
-        <div className="text-xs text-secondary/50 font-sans tracking-widest uppercase animate-pulse">
-          Awaiting Human Signature...
+        <div className="text-xs text-red-accent font-mono tracking-widest uppercase animate-pulse h-4">
+          {status}
         </div>
       </div>
     </motion.div>
