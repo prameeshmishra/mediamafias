@@ -118,11 +118,11 @@ export const Hero = () => {
           
           <div className="relative z-10 mix-blend-screen drop-shadow-[0_0_30px_rgba(192,57,43,0.4)]">
             <Image 
-              src="/Logo Main.png" 
+              src="/player-logo.png" 
               alt="Media Mafias Cartel Player" 
-              width={300} 
-              height={300} 
-              className="object-contain"
+              width={400} 
+              height={400} 
+              className="object-contain drop-shadow-2xl"
               priority
             />
           </div>
