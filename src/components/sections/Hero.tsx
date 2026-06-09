@@ -70,7 +70,7 @@ export const Hero = () => {
                 <span className="absolute top-1/2 left-[-10%] w-[120%] h-[6px] lg:h-[12px] bg-white -rotate-6 z-10 shadow-[0_0_15px_rgba(255,255,255,0.8)]" />
               </span>
             </span>
-            <span className="block mt-4 text-white font-black tracking-tighter drop-shadow-[0_0_30px_rgba(255,255,255,0.3)] text-[1.1em]">
+            <span className="inline-block mt-6 text-white font-sans font-black tracking-[0.15em] drop-shadow-[0_0_30px_rgba(255,255,255,0.3)] text-[0.9em] hover:text-red-accent hover:scale-105 hover:drop-shadow-[0_0_60px_rgba(192,57,43,0.9)] transition-all duration-300 cursor-crosshair">
               CODE
             </span>
           </motion.h1>
@@ -127,8 +127,8 @@ export const Hero = () => {
             <Image 
               src="/player-logo.png" 
               alt="Media Mafias Cartel Player" 
-              width={400} 
-              height={400} 
+              width={280} 
+              height={280} 
               className="object-contain drop-shadow-2xl"
               priority
             />
