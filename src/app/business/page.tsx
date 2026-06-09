@@ -90,25 +90,30 @@ export default function BusinessPage() {
 
           </div>
 
-          {/* Full Width Box 3 */}
-          <motion.div 
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.2 }}
-            className="bg-white text-black p-8 brutalist-border relative group shadow-[8px_8px_0px_0px_rgba(255,255,255,0.2)] hover:shadow-[12px_12px_0px_0px_rgba(255,255,255,0.3)] transition-all duration-300"
-          >
-            <div className="flex items-center gap-4 mb-6">
-              <div className="border-4 border-black p-2">
-                <Headphones size={28} strokeWidth={2.5} />
+          {/* Full Width Box 3 (Clickable) */}
+          <Link href="/future-radio" className="block w-full">
+            <motion.div 
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.2 }}
+              className="bg-white text-black p-8 brutalist-border relative group shadow-[8px_8px_0px_0px_rgba(255,255,255,0.2)] hover:shadow-[12px_12px_0px_0px_rgba(255,255,255,0.3)] hover:bg-[#f5f5f5] transition-all duration-300 cursor-pointer"
+            >
+              <div className="flex items-center justify-between mb-6">
+                <div className="flex items-center gap-4">
+                  <div className="border-4 border-black p-2 bg-black text-white group-hover:bg-red-accent group-hover:border-red-accent transition-colors">
+                    <Headphones size={28} strokeWidth={2.5} />
+                  </div>
+                  <h2 className="font-display text-2xl md:text-3xl uppercase group-hover:text-red-accent transition-colors">
+                    FUTURE RADIO
+                  </h2>
+                </div>
+                <span className="text-red-accent font-display text-3xl opacity-0 group-hover:opacity-100 group-hover:translate-x-2 transition-all">→</span>
               </div>
-              <h2 className="font-display text-2xl md:text-3xl uppercase">
-                FUTURE RADIO
-              </h2>
-            </div>
-            <p className="font-mono text-sm leading-relaxed max-w-3xl font-medium">
-              Our flagship consumer-facing audio streaming platform. A decentralized global hub empowering independent artists, driven by predictive curation and unfiltered human emotion.
-            </p>
-          </motion.div>
+              <p className="font-mono text-sm leading-relaxed max-w-3xl font-medium">
+                Our flagship consumer-facing audio streaming platform. A decentralized global hub empowering independent artists, driven by predictive curation and unfiltered human emotion.
+              </p>
+            </motion.div>
+          </Link>
 
         </div>
       </section>
