@@ -74,8 +74,8 @@ export const Hero = () => {
             transition={{ duration: 0.8, delay: 0.4 }}
             className="text-lg md:text-xl text-secondary mb-12 max-w-2xl font-mono leading-relaxed border-l-2 border-red-accent/50 pl-6 text-left"
           >
-            <p>The era of broadcast towers and static frequencies is dead. We have re-engineered the audio landscape into a high-fidelity, algorithmic stream.</p>
-            <p className="mt-4 text-white">Welcome to the centralized technology network powering the decentralized creator economy.</p>
+            <p>The robust audio streaming solution for the people who know the power of audio.</p>
+            <p className="mt-4 text-white">We are an audio tech company with a consumer-facing product built entirely on our proprietary Radio 3.0 technology.</p>
           </motion.div>
 
           <motion.div
