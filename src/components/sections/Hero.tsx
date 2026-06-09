@@ -62,8 +62,15 @@ export const Hero = () => {
             className="text-6xl md:text-8xl lg:text-[8.5rem] font-display tracking-widest uppercase mb-6 leading-[0.85] text-white hover-glitch relative"
             data-text="RADIO RUNS ON CODE"
           >
-            RADIO RUNS <br className="hidden md:block" />ON
+            RADIO RUNS <br className="hidden md:block" />
             <span className="text-red-accent block mt-2 mix-blend-screen drop-shadow-[0_0_25px_rgba(192,57,43,0.6)]">
+              ON <span className="relative inline-block opacity-70">
+                AIR
+                {/* Brutalist slash crossing out AIR */}
+                <span className="absolute top-1/2 left-[-10%] w-[120%] h-[6px] lg:h-[12px] bg-white -rotate-6 z-10 shadow-[0_0_15px_rgba(255,255,255,0.8)]" />
+              </span>
+            </span>
+            <span className="block mt-4 text-white font-black tracking-tighter drop-shadow-[0_0_30px_rgba(255,255,255,0.3)] text-[1.1em]">
               CODE
             </span>
           </motion.h1>
