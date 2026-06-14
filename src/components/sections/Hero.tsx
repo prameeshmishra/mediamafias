@@ -87,46 +87,53 @@ export const Hero = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.6 }}
-            className="flex flex-col sm:flex-row gap-6 w-full sm:w-auto"
+            className="flex flex-col sm:flex-row gap-6 w-full max-w-2xl mt-8"
           >
-            <Link href="/upload" className="w-full sm:w-auto">
-              <Button size="lg" className="w-full font-display text-2xl tracking-widest pt-1 px-10 shadow-[0_0_30px_rgba(192,57,43,0.3)] border border-red-accent/50 group relative overflow-hidden bg-black text-white hover:bg-red-accent">
-                <span className="relative z-10">UPLOAD CONTENT</span>
-              </Button>
+            {/* Card 1: Upload Content */}
+            <Link href="/upload" className="flex-1 group">
+              <div className="bg-red-accent h-64 p-8 relative overflow-hidden transition-transform duration-300 group-hover:scale-[1.02] border border-red-accent flex flex-col justify-between">
+                <div>
+                  <div className="font-mono text-[10px] tracking-widest uppercase text-black mb-2 font-bold">Distribution</div>
+                  <h3 className="font-display text-4xl uppercase tracking-widest text-black leading-[1.1]">
+                    Upload<br />Content
+                  </h3>
+                </div>
+                
+                {/* Action Button */}
+                <div className="w-12 h-12 bg-black rounded-full flex items-center justify-center group-hover:bg-white transition-colors">
+                  <svg className="w-6 h-6 text-white group-hover:text-black transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
+                  </svg>
+                </div>
+                
+                {/* Decorative Pattern */}
+                <div className="absolute top-0 right-0 w-32 h-32 bg-[radial-gradient(circle_at_center,black_1px,transparent_1px)] bg-[length:8px_8px] opacity-20 -mr-16 -mt-16 pointer-events-none" />
+              </div>
             </Link>
-            <Link href="/academy" className="w-full sm:w-auto">
-              <Button size="lg" variant="outline" className="w-full font-display text-2xl tracking-widest pt-1 px-10 border-white/20 text-white hover:bg-white/5">
-                JOIN ACADEMY
-              </Button>
+
+            {/* Card 2: Join Academy */}
+            <Link href="/academy" className="flex-1 group">
+              <div className="bg-neutral-950 h-64 p-8 relative overflow-hidden transition-transform duration-300 group-hover:scale-[1.02] border border-white/10 flex flex-col justify-between hover:border-red-accent/50">
+                <div>
+                  <div className="font-mono text-[10px] tracking-widest uppercase text-red-accent mb-2">Creators</div>
+                  <h3 className="font-display text-4xl uppercase tracking-widest text-white leading-[1.1]">
+                    Join<br />Academy
+                  </h3>
+                </div>
+                
+                {/* Action Button */}
+                <div className="w-12 h-12 bg-white rounded-full flex items-center justify-center group-hover:bg-red-accent transition-colors">
+                  <svg className="w-6 h-6 text-black group-hover:text-white transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                  </svg>
+                </div>
+                
+                {/* Decorative Pattern */}
+                <div className="absolute top-0 right-0 w-32 h-32 bg-[radial-gradient(circle_at_center,white_1px,transparent_1px)] bg-[length:8px_8px] opacity-10 -mr-16 -mt-16 pointer-events-none" />
+              </div>
             </Link>
           </motion.div>
         </div>
-
-        {/* Right Graphic/Logo Column */}
-        <motion.div 
-          initial={{ opacity: 0, scale: 0.9, x: 30 }}
-          animate={{ opacity: 1, scale: 1, x: 0 }}
-          transition={{ duration: 1, delay: 0.4, ease: "easeOut" }}
-          className="lg:col-span-5 flex justify-center items-center relative mt-12 lg:mt-0"
-        >
-          {/* Simple Black Circle with Border */}
-          <div className="absolute inset-0 border border-white/5 rounded-full w-[200px] h-[200px] md:w-[250px] md:h-[250px] lg:w-[300px] lg:h-[300px] m-auto bg-black flex items-center justify-center shadow-[0_0_30px_rgba(192,57,43,0.1)]">
-            
-            {/* The Transparent Logo */}
-            <div className="relative w-[150px] h-[150px] md:w-[180px] md:h-[180px] lg:w-[220px] lg:h-[220px] mix-blend-screen opacity-90">
-              <Image 
-                src="/Logo Main.png" 
-                alt="Media Mafias Logo" 
-                fill
-                className="object-contain"
-                priority
-              />
-            </div>
-          </div>
-          
-          {/* Spacer to maintain height since we're using absolute positioning for the circle */}
-          <div className="w-[200px] h-[200px] md:w-[250px] md:h-[250px] lg:w-[300px] lg:h-[300px]" />
-        </motion.div>
       </div>
 
       {/* Decorative grain overlay */}
