@@ -52,9 +52,10 @@ export const Hero = () => {
             transition={{ duration: 0.8 }}
             className="mb-8"
           >
-            <div className="text-[10px] font-mono text-secondary tracking-widest uppercase mb-12">
-              INITIALIZING MAFIAOS <span className="text-red-accent animate-pulse">...</span>
-            </div>
+            <h2 className="text-[10px] font-mono text-secondary tracking-widest uppercase mb-12 flex items-center gap-2">
+              <span className="w-2 h-2 rounded-full bg-red-accent animate-pulse"></span>
+              India&apos;s first decentralized audio platform distributing content through API
+            </h2>
           </motion.div>
 
           <motion.h1

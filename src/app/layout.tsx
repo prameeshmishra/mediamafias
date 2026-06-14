@@ -21,9 +21,29 @@ const jetbrainsMono = JetBrains_Mono({
 import { GoogleAnalytics } from '@next/third-parties/google';
 
 export const metadata: Metadata = {
-  title: "Media Mafias | Radio Streaming Software Technology Provider",
-  description: "The future of radio is here. Media Mafias provides Radio as SaaS, digital audio solutions, and streaming software technology for the Indian radio business.",
-  keywords: ["radio business", "streaming software technology provider", "future radio", "digital audio", "radio service in india", "radio as saas", "vernacular radio", "dialect radio"],
+  metadataBase: new URL('https://www.mediamafias.com'),
+  title: {
+    default: "Media Mafias | India's First Decentralized Audio Distribution Platform",
+    template: "%s | Media Mafias",
+  },
+  description: "Monetize your regional podcasts, indie music, and vernacular audio content. We manage and distribute your original creations across global platforms via our powerful Content API, ensuring transparent and fair revenue share.",
+  keywords: [
+    "Monetize podcast India", "indie music distribution", "vernacular audio creators", "sell regional songs", "AI audio studio India", "start podcast hindi",
+    "Vernacular audio API", "decentralized content distribution", "license regional music India", "indie artist API integration", "local audio content platform", "Bhojpuri music distribution", "Tamil indie API"
+  ],
+  openGraph: {
+    type: "website",
+    locale: "en_IN",
+    url: "https://www.mediamafias.com",
+    siteName: "Media Mafias",
+    title: "Media Mafias | Decentralized Audio Platform",
+    description: "Distribute and monetize your indie audio content globally via our powerful API.",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Media Mafias | Decentralized Audio Platform",
+    description: "Distribute and monetize your indie audio content globally via our powerful API.",
+  }
 };
 
 export default function RootLayout({
@@ -34,10 +54,10 @@ export default function RootLayout({
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "SoftwareApplication",
-    "name": "Media Mafias",
-    "applicationCategory": "BusinessApplication",
+    "name": "Media Mafias - Decentralized Audio Platform",
+    "applicationCategory": "MultimediaApplication",
     "operatingSystem": "Web",
-    "description": "Media Mafias provides Radio as SaaS, digital audio solutions, and streaming software technology for the Indian radio business.",
+    "description": "India's first decentralized audio platform distributing vernacular content through API, empowering indie artists to monetize their work.",
     "provider": {
       "@type": "Organization",
       "name": "Media Mafias",

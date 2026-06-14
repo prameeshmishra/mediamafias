@@ -1,11 +1,10 @@
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Radio Streaming Software | Future Radio Technology | Media Mafias",
-  description: "Leverage our Radio as SaaS infrastructure. We are the streaming software technology provider empowering creators to build the digital audio network of the future.",
-  keywords: ["radio streaming software provider", "cloud radio technology", "streaming software technology provider", "decentralized audio", "radio as saas"]
+  title: "Learn Audio Production & Podcasting | Media Mafias Creator Academy",
+  description: "Join the Media Mafias Creator Academy. Learn vernacular audio production, mastering, and monetization. Upload your projects and claim your digital certificate.",
 };
 
-export default function CreateLayout({ children }: { children: React.ReactNode }) {
+export default function AcademyLayout({ children }: { children: React.ReactNode }) {
   return <>{children}</>;
 }
