@@ -112,14 +112,14 @@ export const Hero = () => {
             transition={{ duration: 0.8, delay: 0.6 }}
             className="flex flex-col sm:flex-row gap-6 w-full sm:w-auto"
           >
-            <Link href="/partner" className="w-full sm:w-auto">
+            <Link href="/upload" className="w-full sm:w-auto">
               <Button size="lg" className="w-full font-display text-2xl tracking-widest pt-1 px-10 shadow-[0_0_30px_rgba(192,57,43,0.3)] border border-red-accent/50 group relative overflow-hidden bg-black text-white hover:bg-red-accent">
-                <span className="relative z-10">BECOME A PARTNER</span>
+                <span className="relative z-10">UPLOAD CONTENT</span>
               </Button>
             </Link>
-            <Link href="/technology" className="w-full sm:w-auto">
+            <Link href="/academy" className="w-full sm:w-auto">
               <Button size="lg" variant="outline" className="w-full font-display text-2xl tracking-widest pt-1 px-10 border-white/20 text-white hover:bg-white/5">
-                THE TECHNOLOGY
+                JOIN ACADEMY
               </Button>
             </Link>
           </motion.div>
@@ -186,8 +186,8 @@ export const Hero = () => {
               }`}
             >
               <Image 
-                src="/player-logo.png" 
-                alt="Media Mafias Cartel Player" 
+                src="/Logo Main.png" 
+                alt="Media Mafias Logo" 
                 fill
                 className="object-contain drop-shadow-2xl"
                 priority
