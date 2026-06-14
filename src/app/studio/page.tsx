@@ -69,7 +69,7 @@ export default function StudioPage() {
               [ THE UNDERGROUND LAB ]
             </div>
             
-            <h1 className="text-5xl md:text-7xl font-black font-display tracking-tighter uppercase leading-[0.9]">
+            <h1 className="text-5xl md:text-7xl font-black font-display tracking-tighter uppercase leading-tight mb-4">
               Produce. <br />
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-red-accent to-orange-500">
                 Without Limits.
@@ -81,10 +81,10 @@ export default function StudioPage() {
             </p>
             
             <div className="flex flex-col sm:flex-row items-center gap-4 pt-4">
-              <button className="w-full sm:w-auto px-8 py-4 bg-red-accent text-white font-mono text-sm tracking-widest uppercase hover:bg-white hover:text-red-accent transition-colors relative group overflow-hidden">
+              <Link href="/studio/workspace" className="w-full sm:w-auto px-8 py-4 bg-red-accent text-white font-mono text-sm tracking-widest uppercase hover:bg-white hover:text-red-accent transition-colors relative group overflow-hidden text-center block">
                 <span className="relative z-10">INITIALIZE STUDIO</span>
                 <div className="absolute inset-0 bg-white translate-y-full group-hover:translate-y-0 transition-transform duration-300 ease-out z-0"></div>
-              </button>
+              </Link>
               <div className="flex items-center gap-3 text-sm font-mono text-secondary">
                 <svg className="w-5 h-5 text-green-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
