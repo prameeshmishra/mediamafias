@@ -68,28 +68,34 @@ export default function StudioPage() {
               [ THE UNDERGROUND LAB ]
             </div>
             
-            <h1 className="text-5xl md:text-7xl font-black font-display tracking-tighter uppercase leading-tight mb-4">
+            <h1 className="text-5xl md:text-7xl font-black font-display tracking-tighter uppercase leading-[1.1] mb-6 drop-shadow-2xl">
               Produce. <br />
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-red-accent to-orange-500">
+              <span className="text-transparent bg-clip-text bg-gradient-to-b from-white via-red-500 to-red-900 drop-shadow-[0_0_15px_rgba(255,0,0,0.5)]">
                 Without Limits.
               </span>
             </h1>
             
-            <p className="text-xl text-secondary max-w-xl leading-relaxed font-sans">
+            <p className="text-xl text-secondary max-w-xl leading-relaxed font-sans mb-8">
               Your entire production studio, running right in your browser. Whether it&apos;s a podcast interview, spoken word poetry, or a full-blown music track. Write, record, produce, and distribute from one dashboard.
             </p>
             
-            <div className="flex flex-col sm:flex-row items-center gap-4 pt-4">
-              <Link href="/studio/workspace" className="w-full sm:w-auto px-8 py-4 bg-red-accent text-white font-mono text-sm tracking-widest uppercase hover:bg-white hover:text-red-accent transition-colors relative group overflow-hidden text-center block">
-                <span className="relative z-10">INITIALIZE STUDIO</span>
-                <div className="absolute inset-0 bg-white translate-y-full group-hover:translate-y-0 transition-transform duration-300 ease-out z-0"></div>
+            <div className="flex flex-col gap-4 max-w-xl w-full">
+              <Link href="/studio/remaster" className="w-full flex items-center justify-between px-8 py-5 bg-black border border-white/20 hover:border-red-accent/50 group transition-all duration-300 relative overflow-hidden">
+                <div className="absolute inset-0 bg-red-accent/5 translate-y-full group-hover:translate-y-0 transition-transform duration-300"></div>
+                <div className="relative z-10 flex flex-col">
+                  <span className="font-display font-bold text-xl tracking-widest text-white uppercase group-hover:text-red-accent transition-colors">Remaster Existing Audio</span>
+                  <span className="font-mono text-xs text-secondary tracking-widest uppercase">Upload & Enhance Vocal/Music Quality</span>
+                </div>
+                <svg className="w-6 h-6 text-secondary group-hover:text-red-accent relative z-10 transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12" /></svg>
               </Link>
-              <div className="flex items-center gap-3 text-sm font-mono text-secondary">
-                <svg className="w-5 h-5 text-green-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                </svg>
-                <span>15 DAYS FREE TRIAL</span>
-              </div>
+
+              <Link href="/studio/workspace" className="w-full flex items-center justify-between px-8 py-5 bg-red-accent border border-red-accent hover:bg-white group transition-all duration-300 relative overflow-hidden">
+                <div className="relative z-10 flex flex-col">
+                  <span className="font-display font-bold text-xl tracking-widest text-white uppercase group-hover:text-red-accent transition-colors">Produce From Scratch</span>
+                  <span className="font-mono text-xs text-white/70 group-hover:text-red-accent/70 tracking-widest uppercase">Use AI Content Planner & Generation</span>
+                </div>
+                <svg className="w-6 h-6 text-white group-hover:text-red-accent relative z-10 transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" /></svg>
+              </Link>
             </div>
           </div>
           
