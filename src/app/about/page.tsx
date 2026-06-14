@@ -29,7 +29,7 @@ export default function AboutPage() {
           >
             <h2 className="font-display text-4xl text-white uppercase tracking-widest mb-6">Who We Are</h2>
             <p className="text-xl text-secondary font-sans leading-relaxed">
-              Media Mafias is not a traditional network—we are an elite audio technology company engineering the future of broadcast. We build proprietary <strong className="text-white">Radio 3.0</strong> technology from the ground up, bypassing outdated gatekeepers to deliver high-fidelity, algorithmic streams. We don't just provide software; we deploy a consumer-facing product ecosystem that arms creators, brands, and retail spaces with the most robust audio streaming solution on the market.
+              Media Mafias is the ultimate <strong className="text-white">content production and distribution hub</strong>. We are an elite collective dedicated to discovering, producing, and amplifying vernacular audio content across the globe. We aren't just a label; we are an ecosystem that empowers independent creators through rigorous upskilling in modern broadcast AI, and connects their voices to audiences via direct API pipelines to platforms like Future Radio, YouTube, Instagram, and beyond.
             </p>
           </motion.div>
 
@@ -42,7 +42,7 @@ export default function AboutPage() {
             >
               <h2 className="font-display text-3xl text-red-accent uppercase tracking-widest">Our Mission</h2>
               <p className="text-secondary font-sans leading-relaxed text-lg">
-                To obliterate the monopolized, outdated radio industry. We are arming creators and brands with our proprietary Radio 3.0 technology, straight out of the pocket. We don't ask for airtime; we manufacture it. Our mission is to put absolute broadcast dominance back into the hands of the people who truly understand the power of audio.
+                To obliterate the monopolized gatekeeping of the content industry. Our mission is to arm local and independent creators with world-class production standards and AI-driven broadcast tools. We upskill raw talent and transform them into digital syndicates, manufacturing airtime and guaranteeing distribution.
               </p>
             </motion.div>
 
@@ -54,7 +54,7 @@ export default function AboutPage() {
             >
               <h2 className="font-display text-3xl text-red-accent uppercase tracking-widest">Our Vision</h2>
               <p className="text-secondary font-sans leading-relaxed text-lg">
-                A total decentralization of the global audio landscape. We envision a world where localized culture and indie creators deploy their own 24/7 high-fidelity stations, completely immune to corporate dilution. The era of static frequencies is dead. We are writing the new algorithms for global audio.
+                A total decentralization of the global content landscape. We envision a world where localized culture and indie creators deploy their art seamlessly across the digital realm, powered by our robust vernacular audio API pipelines. The era of static gatekeepers is dead. The signal belongs to the creators.
               </p>
             </motion.div>
           </div>

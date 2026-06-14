@@ -84,19 +84,15 @@ export const Hero = () => {
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="text-6xl md:text-8xl lg:text-[8.5rem] font-display tracking-widest uppercase mb-6 leading-[0.85] text-white hover-glitch relative"
-            data-text="RADIO RUNS ON CODE"
+            className="text-6xl md:text-8xl lg:text-[7.5rem] font-display tracking-widest uppercase mb-6 leading-[0.85] text-white hover-glitch relative"
+            data-text="CONTENT IS KING"
           >
-            RADIO RUNS <br className="hidden md:block" />
-            <span className="text-red-accent block mt-2 mix-blend-screen drop-shadow-[0_0_25px_rgba(192,57,43,0.6)]">
-              ON <span className="relative inline-block opacity-70">
-                AIR
-                {/* Brutalist slash crossing out AIR */}
-                <span className="absolute top-1/2 left-[-10%] w-[120%] h-[6px] lg:h-[12px] bg-white -rotate-6 z-10 shadow-[0_0_15px_rgba(255,255,255,0.8)]" />
-              </span>
+            CONTENT IS <br className="hidden md:block" />
+            <span className="text-white block mt-2 mix-blend-screen">
+              KING
             </span>
-            <span className="inline-block mt-6 text-white font-sans font-black tracking-[0.15em] drop-shadow-[0_0_30px_rgba(255,255,255,0.3)] text-[0.9em] hover:text-red-accent hover:scale-105 hover:drop-shadow-[0_0_60px_rgba(192,57,43,0.9)] transition-all duration-300 cursor-crosshair">
-              CODE
+            <span className="inline-block mt-6 text-red-accent font-sans font-black tracking-[0.15em] drop-shadow-[0_0_30px_rgba(192,57,43,0.3)] text-[0.8em] hover:text-white hover:scale-105 hover:drop-shadow-[0_0_60px_rgba(255,255,255,0.9)] transition-all duration-300 cursor-crosshair">
+              DISTRIBUTION IS GOD.
             </span>
           </motion.h1>
 
@@ -104,10 +100,10 @@ export const Hero = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.4 }}
-            className="text-lg md:text-xl text-secondary mb-12 max-w-2xl font-mono leading-relaxed border-l-2 border-red-accent/50 pl-6 text-left"
+            className="text-lg md:text-xl text-secondary mb-12 max-w-2xl font-mono leading-relaxed border-l-4 border-red-accent pl-6 bg-black/50 p-4"
           >
-            <p>The robust audio streaming solution for the people who know the power of audio.</p>
-            <p className="mt-4 text-white">We are an audio tech company with a consumer-facing product built entirely on our proprietary Radio 3.0 technology.</p>
+            <p className="mb-4">The ultimate content production and distribution hub.</p>
+            <p className="text-white">Upload once. Distribute everywhere. We empower independent creators with world-class production standards, AI upskilling, and direct pipeline access to vernacular audio platforms globally.</p>
           </motion.div>
 
           <motion.div

@@ -12,12 +12,9 @@ export const Header = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = React.useState(false);
 
   const links: { name: string; href: string; external?: boolean }[] = [
-    { name: "Future Radio", href: "/radio" },
-    { name: "Technology", href: "/technology" },
-    { name: "Business", href: "/business" },
-    { name: "Partner", href: "/partner" },
-    { name: "Creator Program", href: "/create" },
-    { name: "Market Analysis", href: "/analysis" },
+    { name: "Creator Academy", href: "/create" },
+    { name: "Distribution", href: "#distribution" },
+    { name: "Content API", href: "/api" },
     { name: "About", href: "/about" },
     { name: "Contact", href: "/contact" }
   ];
@@ -64,8 +61,8 @@ export const Header = () => {
               </Link>
             );
           })}
-          <Link href="/partner" className="ml-4 brutalist-border bg-black text-red-accent px-6 py-2 hover:bg-red-accent hover:text-white transition-all whitespace-nowrap">
-            GET YOUR STATION CODE
+          <Link href="/create" className="ml-4 brutalist-border bg-black text-red-accent px-6 py-2 hover:bg-red-accent hover:text-white transition-all whitespace-nowrap">
+            UPLOAD CONTENT
           </Link>
         </nav>
 
@@ -127,11 +124,11 @@ export const Header = () => {
                 className="mt-8"
               >
                 <Link 
-                  href="/partner" 
+                  href="/create" 
                   onClick={() => setIsMobileMenuOpen(false)}
                   className="inline-block brutalist-border bg-black text-red-accent px-8 py-4 hover:bg-red-accent hover:text-white transition-all text-2xl"
                 >
-                  GET YOUR STATION CODE
+                  UPLOAD CONTENT
                 </Link>
               </motion.div>
             </nav>
