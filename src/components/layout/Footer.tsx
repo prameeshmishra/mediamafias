@@ -64,7 +64,7 @@ export const Footer = () => {
           <div className="flex items-center gap-2 hover:opacity-100 hover:text-white transition-all cursor-pointer group">
             <div className="w-5 h-5 flex items-center justify-center group-hover:scale-110 transition-transform">
               <img 
-                src="https://upload.wikimedia.org/wikipedia/commons/5/55/Emblem_of_India.svg" 
+                src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/55/Emblem_of_India.svg/200px-Emblem_of_India.svg.png" 
                 alt="Govt of India" 
                 className="w-full h-full object-contain filter grayscale brightness-200"
               />
@@ -75,7 +75,7 @@ export const Footer = () => {
           <div className="flex items-center gap-2 hover:opacity-100 hover:text-[#0099FF] transition-all cursor-pointer group">
             <div className="w-12 h-5 flex items-center justify-center group-hover:scale-110 transition-transform">
               <img 
-                src="https://upload.wikimedia.org/wikipedia/commons/e/e0/Digital_India_logo.svg" 
+                src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e0/Digital_India_logo.svg/250px-Digital_India_logo.svg.png" 
                 alt="Digital India" 
                 className="w-full h-full object-contain"
               />
@@ -110,8 +110,12 @@ export const Footer = () => {
           </div>
 
           <div className="flex items-center gap-2 hover:opacity-100 hover:text-[#2ECA7F] transition-all cursor-pointer group">
-            <div className="w-5 h-5 rounded-full bg-current flex items-center justify-center group-hover:scale-110 transition-transform">
-              <svg className="w-3 h-3 text-white" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2zm0 14.5c-2.485 0-4.5-2.015-4.5-4.5S9.515 7.5 12 7.5s4.5 2.015 4.5 4.5-2.015 4.5-4.5 4.5zm0-7c-1.381 0-2.5 1.119-2.5 2.5s1.119 2.5 2.5 2.5 2.5-1.119 2.5-2.5-1.119-2.5-2.5-2.5z"/></svg>
+            <div className="w-5 h-5 flex items-center justify-center group-hover:scale-110 transition-transform">
+              <img 
+                src="https://cdn.simpleicons.org/jiosaavn/2ECA7F" 
+                alt="JioSaavn" 
+                className="w-full h-full object-contain"
+              />
             </div>
             <span className="font-display tracking-widest uppercase text-xs">JioSaavn</span>
           </div>
