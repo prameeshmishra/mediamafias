@@ -1,12 +1,9 @@
+"use client";
+
+import { useState } from "react";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import Link from "next/link";
-import { Metadata } from "next";
-
-export const metadata: Metadata = {
-  title: "Online Production Studio | Media Mafias",
-  description: "Produce podcasts, music, and spoken content directly from your browser. 15-day free trial, then join the underground.",
-};
 
 const STUDIO_FEATURES = [
   {
@@ -48,6 +45,8 @@ const STUDIO_FEATURES = [
 ];
 
 export default function StudioPage() {
+  const [isYearly, setIsYearly] = useState(false);
+
   return (
     <main className="flex min-h-screen flex-col bg-black text-white selection:bg-red-accent selection:text-white">
       <Header />
@@ -179,10 +178,28 @@ export default function StudioPage() {
             <div className="absolute top-0 left-0 w-8 h-8 border-t-2 border-l-2 border-red-accent"></div>
             <div className="absolute bottom-0 right-0 w-8 h-8 border-b-2 border-r-2 border-red-accent"></div>
             
+            {/* Billing Toggle */}
+            <div className="flex items-center justify-center gap-4 mb-8">
+              <span className={`font-mono text-xs tracking-widest uppercase transition-colors ${!isYearly ? "text-white" : "text-secondary"}`}>Monthly</span>
+              <button 
+                onClick={() => setIsYearly(!isYearly)}
+                className="w-14 h-6 rounded-full bg-black border border-white/20 relative flex items-center p-1 transition-colors hover:border-red-accent/50"
+              >
+                <div className={`w-4 h-4 rounded-full bg-red-accent transition-transform duration-300 ${isYearly ? "translate-x-8" : ""}`}></div>
+              </button>
+              <span className={`font-mono text-xs tracking-widest uppercase transition-colors ${isYearly ? "text-white" : "text-secondary"}`}>Yearly</span>
+            </div>
+
+            {isYearly && (
+              <div className="absolute top-6 right-6 bg-green-500/10 text-green-500 border border-green-500/20 px-3 py-1 font-mono text-[10px] tracking-widest uppercase">
+                Save ₹1,989 / Yr
+              </div>
+            )}
+            
             <h3 className="text-3xl font-display font-bold uppercase tracking-widest mb-2">Media Mafias PRO</h3>
             <div className="flex items-end justify-center gap-2 mb-8 mt-6">
-              <span className="text-5xl font-black">₹999</span>
-              <span className="text-secondary font-mono uppercase tracking-widest">/ month</span>
+              <span className="text-5xl font-black">₹{isYearly ? "9,999" : "999"}</span>
+              <span className="text-secondary font-mono uppercase tracking-widest">/ {isYearly ? "year" : "month"}</span>
             </div>
             
             <ul className="space-y-4 text-left max-w-sm mx-auto mb-10 font-sans text-secondary">

@@ -183,10 +183,10 @@ export default function CreatorProgramPage() {
           
           <div className="text-center mb-16">
             <h2 className="font-display text-5xl tracking-widest uppercase text-transparent bg-clip-text bg-gradient-to-r from-[#FFF1D0] via-[#E6B981] to-[#A37B45] mb-4">
-              VIP BACKSTAGE PASS
+              ACADEMY ENROLLMENT
             </h2>
             <p className="text-secondary font-mono text-sm max-w-2xl mx-auto leading-relaxed">
-              We select only the most dedicated talent. Apply below to enter the Media Mafias Creator Academy and claim your stake in the global creator economy.
+              Start your journey today. Complete the registration below and pay the one-time ₹99 enrollment fee to access your learning dashboard and production tools.
             </p>
           </div>
 
@@ -194,7 +194,11 @@ export default function CreatorProgramPage() {
             className="bg-black p-8 md:p-12 border-2 border-[#E6B981]/30 shadow-[0_0_50px_rgba(230,185,129,0.05)] relative"
             onSubmit={(e) => {
               e.preventDefault();
-              alert("VIP APPLICATION RECEIVED. Welcome to the Goldmine.");
+              // Simulate payment gateway processing
+              alert("Redirecting to Secure Payment Gateway for ₹99...");
+              setTimeout(() => {
+                window.location.href = "/academy/dashboard";
+              }, 1500);
             }}
           >
             {/* VIP Corner accents */}
@@ -223,12 +227,12 @@ export default function CreatorProgramPage() {
               </div>
 
               <div className="space-y-2">
-                <label className="font-mono text-[10px] text-[#E6B981] tracking-widest uppercase">Email / Transmission Comms</label>
+                <label className="font-mono text-[10px] text-[#E6B981] tracking-widest uppercase">Email Address</label>
                 <input 
                   type="email" 
                   required
                   className="w-full bg-neutral-900/50 border-b border-white/20 px-4 py-3 text-white font-sans focus:outline-none focus:border-[#E6B981] focus:bg-neutral-900 transition-all"
-                  placeholder="transmission@email.com"
+                  placeholder="you@email.com"
                 />
               </div>
               <div className="space-y-2">
@@ -240,60 +244,17 @@ export default function CreatorProgramPage() {
                   placeholder="+91"
                 />
               </div>
-
-              <div className="space-y-2">
-                <label className="font-mono text-[10px] text-[#E6B981] tracking-widest uppercase">Region & Dialect Focus</label>
-                <input 
-                  type="text" 
-                  required
-                  className="w-full bg-neutral-900/50 border-b border-white/20 px-4 py-3 text-white font-sans focus:outline-none focus:border-[#E6B981] focus:bg-neutral-900 transition-all"
-                  placeholder="e.g. Bundeli, Bhojpuri, Awadhi..."
-                />
-              </div>
-              <div className="space-y-2">
-                <label className="font-mono text-[10px] text-[#E6B981] tracking-widest uppercase">Primary Talent</label>
-                <select 
-                  required
-                  className="w-full bg-neutral-900/50 border-b border-white/20 px-4 py-3 text-white font-sans focus:outline-none focus:border-[#E6B981] focus:bg-neutral-900 transition-all appearance-none"
-                >
-                  <option value="" disabled selected>Select an option</option>
-                  <option value="singer">Singer / Musician</option>
-                  <option value="rj">Radio Jockey / Voice Over</option>
-                  <option value="producer">Music Producer / Beatmaker</option>
-                  <option value="writer">Lyricist / Writer</option>
-                  <option value="other">Other</option>
-                </select>
-              </div>
-            </div>
-
-            <div className="space-y-2 mb-8">
-              <label className="font-mono text-[10px] text-[#E6B981] tracking-widest uppercase">Portfolio Link (Instagram, YouTube, etc.)</label>
-              <input 
-                type="url" 
-                className="w-full bg-neutral-900/50 border-b border-white/20 px-4 py-3 text-white font-sans focus:outline-none focus:border-[#E6B981] focus:bg-neutral-900 transition-all"
-                placeholder="Paste your link here"
-              />
-            </div>
-
-            <div className="space-y-2 mb-12">
-              <label className="font-mono text-[10px] text-[#E6B981] tracking-widest uppercase">Your Vision</label>
-              <textarea 
-                required
-                rows={3}
-                className="w-full bg-neutral-900/50 border-b border-white/20 px-4 py-3 text-white font-sans focus:outline-none focus:border-[#E6B981] focus:bg-neutral-900 transition-all resize-none"
-                placeholder="Why are you ready for the global stage?"
-              ></textarea>
             </div>
 
             <button 
               type="submit"
               className="w-full bg-gradient-to-r from-[#C49A5A] via-[#E6B981] to-[#C49A5A] text-black hover:scale-[1.02] font-display text-2xl tracking-widest uppercase py-5 transition-all duration-300 shadow-[0_0_20px_rgba(230,185,129,0.3)] hover:shadow-[0_0_40px_rgba(230,185,129,0.6)]"
             >
-              SUBMIT VIP APPLICATION
+              PROCEED TO PAYMENT - ₹99
             </button>
             
             <p className="text-center text-[#E6B981]/50 font-mono text-[10px] uppercase tracking-widest mt-6">
-              SECURE ENCRYPTED SUBMISSION
+              SECURE ENCRYPTED CHECKOUT
             </p>
           </form>
         </div>

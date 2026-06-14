@@ -24,6 +24,7 @@ export default function WorkspacePage() {
   const [script, setScript] = useState("");
   const [isGenerating, setIsGenerating] = useState(false);
   const [generatedPrompt, setGeneratedPrompt] = useState("");
+  const [audioResult, setAudioResult] = useState<string | null>(null);
 
   // Auto-generate the master prompt whenever parameters change
   useEffect(() => {
@@ -61,13 +62,30 @@ export default function WorkspacePage() {
     setGeneratedPrompt(prompt);
   }, [format, speed, tone, emotion, bgMusic, genre, energy, tempo, script]);
 
-  const handleProduce = () => {
+  const handleProduce = async () => {
     setIsGenerating(true);
-    // Simulate AI generation process
-    setTimeout(() => {
+    setAudioResult(null);
+    
+    try {
+      const response = await fetch("/api/generate", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ prompt: generatedPrompt, format })
+      });
+      
+      const data = await response.json();
+      
+      if (data.success && data.audioUrl) {
+        setAudioResult(data.audioUrl);
+      } else {
+        alert("Generation failed: " + (data.error || "Unknown error"));
+      }
+    } catch (error) {
+      console.error(error);
+      alert("Failed to reach API");
+    } finally {
       setIsGenerating(false);
-      alert("PRODUCTION COMPLETE. Audio artifact has been saved to your underground vault.");
-    }, 3000);
+    }
   };
 
   return (
@@ -268,11 +286,18 @@ export default function WorkspacePage() {
                 <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20 mix-blend-overlay pointer-events-none"></div>
                 <span className="relative z-10 flex items-center justify-center gap-2">
                   <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" /></svg>
-                  PRODUCE CONTENT
+                  {isGenerating ? "INITIALIZING AI ENGINE..." : "PRODUCE CONTENT"}
                 </span>
               </button>
               
-              <p className="text-center font-mono text-[10px] tracking-widest uppercase text-secondary">
+              {audioResult && (
+                <div className="mt-6 p-4 bg-green-500/10 border border-green-500/20 text-center animate-in fade-in zoom-in duration-300">
+                  <p className="font-mono text-xs text-green-500 uppercase tracking-widest mb-4">PRODUCTION COMPLETE. LISTEN BELOW:</p>
+                  <audio controls src={audioResult} className="w-full h-10 outline-none" />
+                </div>
+              )}
+              
+              <p className="text-center font-mono text-[10px] tracking-widest uppercase text-secondary mt-4">
                 By producing, you agree to our Content License Agreement.
               </p>
             </div>
