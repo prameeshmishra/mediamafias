@@ -20,10 +20,10 @@ export const Footer = () => {
             />
           </Link>
           <p className="text-secondary font-sans text-sm max-w-sm leading-relaxed border-l-2 border-red-accent/50 pl-4">
-            The decentralized audio network built on code. Broadcasting from the underground to the world.
+            Empowering local creators to reach global audiences. We are the ultimate content aggregator and distribution hub, powering the vernacular audio revolution through robust API pipelines.
           </p>
           <div className="text-[10px] font-mono text-secondary/40 tracking-widest uppercase">
-            SYS.NODE.01 :: ENCRYPTED SIGNAL :: CARTEL ACTIVE
+            CONTENT DISTRIBUTION PIPELINE :: ACTIVE
           </div>
         </div>
 
@@ -62,8 +62,13 @@ export const Footer = () => {
         <div className="flex flex-wrap justify-center items-center gap-8 md:gap-12 opacity-70">
           
           <div className="flex items-center gap-2 hover:opacity-100 hover:text-red-accent transition-all cursor-pointer group">
-            <div className="w-8 h-8 rounded-full bg-red-accent flex items-center justify-center group-hover:scale-110 transition-transform">
-              <svg className="w-4 h-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z" /></svg>
+            <div className="w-8 h-8 rounded-full bg-black border border-white/10 flex items-center justify-center group-hover:scale-110 transition-transform relative overflow-hidden">
+              <Image 
+                src="/player-logo.png" 
+                alt="The Future Radio" 
+                fill
+                className="object-contain p-1"
+              />
             </div>
             <span className="font-display tracking-widest uppercase text-sm">The Future Radio</span>
           </div>
