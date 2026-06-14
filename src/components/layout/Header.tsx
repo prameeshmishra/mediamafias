@@ -12,7 +12,8 @@ export const Header = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = React.useState(false);
 
   const links: { name: string; href: string; external?: boolean }[] = [
-    { name: "Creator Academy", href: "/create" },
+    { name: "Creator Academy", href: "/academy" },
+    { name: "Spotlight", href: "/spotlight" },
     { name: "Distribution", href: "#distribution" },
     { name: "Content API", href: "/api" },
     { name: "About", href: "/about" },
@@ -61,7 +62,7 @@ export const Header = () => {
               </Link>
             );
           })}
-          <Link href="/create" className="ml-4 brutalist-border bg-black text-red-accent px-6 py-2 hover:bg-red-accent hover:text-white transition-all whitespace-nowrap">
+          <Link href="/upload" className="ml-4 brutalist-border bg-black text-red-accent px-6 py-2 hover:bg-red-accent hover:text-white transition-all whitespace-nowrap">
             UPLOAD CONTENT
           </Link>
         </nav>
@@ -124,7 +125,7 @@ export const Header = () => {
                 className="mt-8"
               >
                 <Link 
-                  href="/create" 
+                  href="/upload" 
                   onClick={() => setIsMobileMenuOpen(false)}
                   className="inline-block brutalist-border bg-black text-red-accent px-8 py-4 hover:bg-red-accent hover:text-white transition-all text-2xl"
                 >
