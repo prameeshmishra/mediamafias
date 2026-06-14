@@ -8,167 +8,108 @@ import Image from "next/image";
 
 export default function CreatorProgramPage() {
   return (
-    <main className="flex min-h-screen flex-col bg-black text-white selection:bg-red-accent selection:text-white">
+    <main className="flex min-h-screen flex-col bg-black text-white selection:bg-[#E6B981] selection:text-black">
       <Header />
       
-      {/* Grand Hero Section */}
-      <section className="pt-40 pb-24 px-6 relative border-b border-white/5 overflow-hidden flex flex-col items-center text-center">
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,rgba(192,57,43,0.1)_0%,rgba(0,0,0,1)_60%)] pointer-events-none" />
+      {/* Grand VIP Hero Section */}
+      <section className="pt-40 pb-24 px-6 relative overflow-hidden flex flex-col items-center text-center border-b border-[#E6B981]/10">
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,rgba(230,185,129,0.1)_0%,rgba(0,0,0,1)_60%)] pointer-events-none" />
         
         <motion.div
           initial={{ opacity: 0, scale: 0.95 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 1, ease: "easeOut" }}
-          className="relative z-10 max-w-5xl mx-auto space-y-6"
+          className="relative z-10 max-w-5xl mx-auto space-y-8"
         >
-          <div className="inline-flex items-center gap-3 border border-red-accent/30 bg-red-accent/5 px-6 py-2">
-            <div className="w-2 h-2 bg-red-accent rounded-full animate-pulse" />
-            <span className="text-red-accent font-mono text-sm tracking-widest uppercase">
-              The Creator Program
+          <div className="inline-flex items-center gap-3 border border-[#E6B981]/30 bg-[#E6B981]/5 px-6 py-2 shadow-[0_0_20px_rgba(230,185,129,0.1)]">
+            <div className="w-2 h-2 bg-[#E6B981] rounded-full animate-pulse shadow-[0_0_10px_#E6B981]" />
+            <span className="text-[#E6B981] font-mono text-sm tracking-widest uppercase">
+              Exclusive Access Activated
             </span>
           </div>
           
-          <h1 className="font-display text-6xl md:text-8xl tracking-widest uppercase text-white leading-[0.9] hover-glitch pt-4">
-            THE NEW <br/> <span className="text-red-accent">CREATOR ECONOMY</span>
+          <h1 className="font-display text-5xl md:text-7xl tracking-widest uppercase text-white leading-[1.1] pt-4">
+            YOUR CONTENT IS A <br/> 
+            <span className="text-transparent bg-clip-text bg-gradient-to-b from-[#FFF1D0] via-[#E6B981] to-[#A37B45] drop-shadow-[0_0_30px_rgba(230,185,129,0.3)]">GOLDMINE</span>
           </h1>
           
-          <p className="text-xl md:text-2xl text-secondary font-mono max-w-3xl mx-auto leading-relaxed pt-6 border-t border-white/10">
-            Empowering the next generation of digital voices. We train raw talent to wield world-class technology, digitizing local culture for the global stage.
+          <p className="text-lg md:text-xl text-secondary font-mono max-w-3xl mx-auto leading-relaxed pt-6 border-t border-[#E6B981]/10">
+            Welcome to the ultimate creator onboarding gateway. We transform raw vernacular talent into global sensations. Zero production costs. Instant worldwide distribution. 100% transparent royalties.
           </p>
+
+          <div className="pt-8 flex flex-col sm:flex-row justify-center gap-6">
+            <a href="#apply" className="inline-block bg-gradient-to-b from-[#E6B981] to-[#C49A5A] text-black font-display text-xl md:text-2xl tracking-widest uppercase px-10 py-5 hover:scale-105 hover:shadow-[0_0_40px_rgba(230,185,129,0.4)] transition-all duration-300">
+              CLAIM YOUR SPOT
+            </a>
+            <div className="flex items-center justify-center gap-3 text-secondary font-mono text-sm uppercase tracking-widest border border-white/10 px-8 py-5">
+              <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse" /> Applications Open
+            </div>
+          </div>
         </motion.div>
       </section>
 
-      {/* The Vision Section (Neutral Alignment) */}
-      <section className="py-24 px-6 relative bg-neutral-950 border-b border-white/5">
-        <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-          
-          {/* Typography Graphic Column */}
-          <motion.div 
-            initial={{ opacity: 0, x: -30 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            className="lg:col-span-5 relative"
-          >
-            <div className="relative p-12 border border-white/10 bg-black brutalist-border shadow-[0_0_50px_rgba(192,57,43,0.1)] group overflow-hidden min-h-[400px] flex flex-col justify-center">
-              {/* Decorative dotted background */}
-              <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyMCIgaGVpZ2h0PSIyMCI+CjxjaXJjbGUgY3g9IjIiIGN5PSIyIiByPSIyIiBmaWxsPSJyZ2JhKDI1NSwyNTUsMjU1LDAuMDUpIi8+Cjwvc3ZnPg==')] pointer-events-none opacity-50 transition-opacity group-hover:opacity-100" />
-              
-              <div className="absolute top-0 left-0 w-8 h-8 border-t-2 border-l-2 border-red-accent z-20" />
-              <div className="absolute bottom-0 right-0 w-8 h-8 border-b-2 border-r-2 border-red-accent z-20" />
-              
-              <div className="relative z-10">
-                <h3 className="font-display text-5xl md:text-6xl uppercase leading-[0.9] text-white">
-                  THE NEW<br/><span className="text-red-accent">STORY<br/>TELLERS</span>
-                </h3>
-              </div>
-              
-              <div className="absolute -bottom-4 -right-4 bg-red-accent text-white font-mono text-[10px] px-3 py-1 tracking-widest uppercase z-20">
-                NATIONAL VISION
-              </div>
-            </div>
-          </motion.div>
-
-          {/* Quote & Alignment Column */}
-          <motion.div 
-            initial={{ opacity: 0, x: 30 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            className="lg:col-span-7 space-y-8"
-          >
-            <div className="space-y-4 relative">
-              <span className="absolute -top-16 -left-8 text-[120px] font-display text-white/5 leading-none select-none">"</span>
-              <blockquote className="font-display text-3xl md:text-5xl uppercase leading-snug text-white relative z-10">
-                Creators are shaping the future of India's digital identity.
-              </blockquote>
-              <div className="flex items-center gap-4 pt-4 border-t border-red-accent/30 w-full">
-                <div className="w-12 h-px bg-red-accent shrink-0" />
-                <div className="font-mono text-sm tracking-widest text-red-accent uppercase space-y-1">
-                  <p className="font-bold text-white text-base">National Vision Alignment</p>
-                  <p>Empowering The Creator Economy</p>
-                </div>
-              </div>
-            </div>
-
-            <div className="pt-8 space-y-6 text-secondary font-sans text-lg leading-relaxed border-l-2 border-white/10 pl-6">
-              <p>
-                Aligned with the National Vision for India's Creator Economy to preserve and digitize hyper-local vernacular talent and folk music.
-              </p>
-              <p>
-                We believe that true cultural impact happens when local talent is given access to world-class tools. Our Creator Program doesn&apos;t just host audio; it actively trains, equips, and transforms grassroots artists into professional digital broadcasters.
-              </p>
-              
-              <div className="flex items-center gap-8 pt-8 mt-8 border-t border-white/5">
-                <div className="flex items-center justify-center h-16 px-6 bg-white/5 border border-white/10 rounded group hover:bg-white/10 transition-colors">
-                  <div className="font-sans text-center">
-                    <span className="font-bold text-white text-lg tracking-tight block leading-none">Digital India</span>
-                    <span className="text-[8px] uppercase tracking-widest text-red-accent mt-1 block">Power To Empower</span>
-                  </div>
-                </div>
-                <div className="flex items-center justify-center h-16 px-6 bg-white/5 border border-white/10 rounded group hover:bg-white/10 transition-colors">
-                  <div className="font-display text-center">
-                    <span className="font-bold text-white text-lg tracking-widest uppercase block leading-none">Make In India</span>
-                    <span className="text-[8px] uppercase tracking-widest text-secondary mt-1 block">National Initiative</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </motion.div>
-
-        </div>
-      </section>
-
-      {/* Impact Grid */}
-      <section className="py-24 px-6 relative bg-black">
+      {/* The VIP Perks Grid */}
+      <section className="py-24 px-6 relative bg-neutral-950 border-b border-[#E6B981]/5">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-20">
-            <h2 className="font-display text-4xl md:text-5xl tracking-widest uppercase text-white mb-4">THE IMPACT PROTOCOL</h2>
-            <p className="text-secondary font-mono text-sm uppercase tracking-widest">How We Build the Next Generation</p>
+            <h2 className="font-display text-4xl tracking-widest uppercase text-[#E6B981] mb-4">THE MEDIA MAFIAS ADVANTAGE</h2>
+            <p className="text-secondary font-mono text-sm uppercase tracking-widest">Why Our Creators Dominate The Charts</p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             
-            {/* Optimization */}
             <motion.div 
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              className="p-8 border border-white/10 hover:border-red-accent/50 bg-neutral-950 transition-all group"
+              className="p-8 border border-white/5 hover:border-[#E6B981]/50 bg-black transition-all group relative overflow-hidden"
             >
-              <div className="text-red-accent font-display text-6xl mb-6 opacity-50 group-hover:opacity-100 transition-opacity">01</div>
-              <h3 className="font-display text-2xl uppercase tracking-widest text-white mb-4">Tool Mastery & Optimization</h3>
+              <div className="text-[#E6B981] font-display text-5xl mb-6 opacity-40 group-hover:opacity-100 transition-opacity drop-shadow-[0_0_10px_rgba(230,185,129,0.5)]">01</div>
+              <h3 className="font-display text-xl uppercase tracking-widest text-white mb-4">Zero Cost Production</h3>
               <p className="text-secondary font-mono text-sm leading-relaxed">
-                Raw talent is no longer enough. We train our creators to utilize cutting-edge AI production tools, dynamic audio mastering, and automated schedule generation to drastically optimize their content creation process.
+                Access world-class recording equipment and elite sound engineers without spending a single rupee. Your talent is the only currency we need.
               </p>
             </motion.div>
 
-            {/* Cultural Digitization */}
+            <motion.div 
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.1 }}
+              className="p-8 border border-white/5 hover:border-[#E6B981]/50 bg-black transition-all group relative overflow-hidden"
+            >
+              <div className="text-[#E6B981] font-display text-5xl mb-6 opacity-40 group-hover:opacity-100 transition-opacity drop-shadow-[0_0_10px_rgba(230,185,129,0.5)]">02</div>
+              <h3 className="font-display text-xl uppercase tracking-widest text-white mb-4">AI Upskilling</h3>
+              <p className="text-secondary font-mono text-sm leading-relaxed">
+                Master the future of music. We train you to use advanced AI tools for beat production, dynamic mastering, and rapid content scaling.
+              </p>
+            </motion.div>
+
             <motion.div 
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: 0.2 }}
-              className="p-8 border border-white/10 hover:border-red-accent/50 bg-neutral-950 transition-all group"
+              className="p-8 border border-white/5 hover:border-[#E6B981]/50 bg-black transition-all group relative overflow-hidden"
             >
-              <div className="text-red-accent font-display text-6xl mb-6 opacity-50 group-hover:opacity-100 transition-opacity">02</div>
-              <h3 className="font-display text-2xl uppercase tracking-widest text-white mb-4">Cultural Digitization</h3>
+              <div className="text-[#E6B981] font-display text-5xl mb-6 opacity-40 group-hover:opacity-100 transition-opacity drop-shadow-[0_0_10px_rgba(230,185,129,0.5)]">03</div>
+              <h3 className="font-display text-xl uppercase tracking-widest text-white mb-4">Global Distribution</h3>
               <p className="text-secondary font-mono text-sm leading-relaxed">
-                We are on a mission to digitally preserve India&apos;s rich heritage. We actively promote local artists, ensuring that hyper-local dialects, folk music, and regional stories are digitized and protected on our algorithmic network.
+                Upload once via our pipeline and get instantly published on YouTube, Spotify, JioSaavn, Instagram, and The Future Radio network.
               </p>
             </motion.div>
 
-            {/* Global Distribution */}
             <motion.div 
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ delay: 0.4 }}
-              className="p-8 border border-white/10 hover:border-red-accent/50 bg-neutral-950 transition-all group relative overflow-hidden"
+              transition={{ delay: 0.3 }}
+              className="p-8 border border-white/5 hover:border-[#E6B981]/50 bg-black transition-all group relative overflow-hidden"
             >
-              <div className="absolute top-0 right-0 w-32 h-32 bg-red-accent/5 blur-[50px] pointer-events-none group-hover:bg-red-accent/20 transition-colors" />
-              <div className="text-red-accent font-display text-6xl mb-6 opacity-50 group-hover:opacity-100 transition-opacity">03</div>
-              <h3 className="font-display text-2xl uppercase tracking-widest text-white mb-4">Global Distribution</h3>
+              <div className="text-[#E6B981] font-display text-5xl mb-6 opacity-40 group-hover:opacity-100 transition-opacity drop-shadow-[0_0_10px_rgba(230,185,129,0.5)]">04</div>
+              <h3 className="font-display text-xl uppercase tracking-widest text-white mb-4">100% Transparent Royalties</h3>
               <p className="text-secondary font-mono text-sm leading-relaxed">
-                Local roots, global reach. By integrating our creators into the Media Mafias MafiaOS, we instantly bridge the gap, projecting localized, world-class production directly onto the global digital stage.
+                No hidden fees. Every stream translates to revenue tracked transparently. You keep a fair, industry-leading share of your commercial success.
               </p>
             </motion.div>
 
@@ -176,86 +117,144 @@ export default function CreatorProgramPage() {
         </div>
       </section>
 
-      {/* Application Form Section */}
-      <section className="py-24 px-6 relative bg-neutral-950 border-t border-white/5" id="apply">
-        <div className="max-w-4xl mx-auto">
-          <div className="text-center mb-16">
-            <div className="inline-flex items-center gap-3 border border-red-accent/30 bg-red-accent/5 px-4 py-1.5 mb-6">
-              <span className="text-red-accent font-mono text-xs tracking-widest uppercase">
-                Media Mafias Academy
-              </span>
+      {/* Social Proof / Testimonials */}
+      <section className="py-24 px-6 relative bg-black border-b border-[#E6B981]/5">
+        <div className="max-w-7xl mx-auto">
+          <div className="flex flex-col md:flex-row items-end justify-between mb-16 gap-6">
+            <div>
+              <h2 className="font-display text-4xl tracking-widest uppercase text-white mb-2">SUCCESS SIGNALS</h2>
+              <p className="text-secondary font-mono text-sm uppercase tracking-widest">Real Creators. Global Reach.</p>
             </div>
-            <h2 className="font-display text-4xl md:text-5xl tracking-widest uppercase text-white mb-4">
-              JOIN THE REVOLUTION
+            <div className="text-right text-[#E6B981] font-mono text-sm">
+              OVER 50M+ MONTHLY STREAMS GENERATED
+            </div>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            
+            <div className="p-8 border border-white/10 bg-neutral-950 relative group">
+              <div className="absolute top-4 right-4 opacity-30 group-hover:opacity-100 transition-opacity">
+                <svg className="w-8 h-8 text-[#1DB954]" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.54.659.3 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.6.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z"/></svg>
+              </div>
+              <p className="text-secondary font-sans text-lg italic mb-8">
+                "I was singing Bundeli folk songs in my village. Media Mafias gave me studio access, distributed my tracks, and within months I hit 2 million streams on Spotify. My life changed completely."
+              </p>
+              <div>
+                <h4 className="font-display text-xl uppercase tracking-widest text-white">Ramesh T.</h4>
+                <p className="text-[#E6B981] font-mono text-xs uppercase tracking-widest mt-1">Bundeli Folk • Madhya Pradesh</p>
+              </div>
+            </div>
+
+            <div className="p-8 border border-white/10 bg-neutral-950 relative group">
+              <div className="absolute top-4 right-4 opacity-30 group-hover:opacity-100 transition-opacity">
+                <svg className="w-8 h-8 text-[#FF0000]" fill="currentColor" viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+              </div>
+              <p className="text-secondary font-sans text-lg italic mb-8">
+                "Media Mafias API put my music directly into thousands of YouTube Shorts. The AI upskilling taught me how to master my own Bhojpuri beats. Now I'm earning royalties every month."
+              </p>
+              <div>
+                <h4 className="font-display text-xl uppercase tracking-widest text-white">Neha K.</h4>
+                <p className="text-[#E6B981] font-mono text-xs uppercase tracking-widest mt-1">Bhojpuri Bass • Bihar</p>
+              </div>
+            </div>
+
+            <div className="p-8 border border-white/10 bg-neutral-950 relative group">
+              <div className="absolute top-4 right-4 opacity-30 group-hover:opacity-100 transition-opacity">
+                <div className="w-8 h-8 rounded-full bg-[#E6B981] flex items-center justify-center overflow-hidden">
+                  <Image src="/player-logo.png" alt="Future Radio" width={24} height={24} className="object-contain" />
+                </div>
+              </div>
+              <p className="text-secondary font-sans text-lg italic mb-8">
+                "Getting featured on The Future Radio gave my Malwi rap the boost it needed. Media Mafias handles all the licensing and distribution so I can just focus on the bars."
+              </p>
+              <div>
+                <h4 className="font-display text-xl uppercase tracking-widest text-white">MC Indore</h4>
+                <p className="text-[#E6B981] font-mono text-xs uppercase tracking-widest mt-1">Malwi Rap • MP</p>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+      {/* VIP Application Form Section */}
+      <section className="py-24 px-6 relative bg-neutral-950" id="apply">
+        <div className="max-w-4xl mx-auto">
+          
+          <div className="text-center mb-16">
+            <h2 className="font-display text-5xl tracking-widest uppercase text-transparent bg-clip-text bg-gradient-to-r from-[#FFF1D0] via-[#E6B981] to-[#A37B45] mb-4">
+              VIP BACKSTAGE PASS
             </h2>
             <p className="text-secondary font-mono text-sm max-w-2xl mx-auto leading-relaxed">
-              Register for our Skill Development Center. We are empowering local artists to become global voices. Submit your details below to begin your transformation.
+              We select only the most dedicated talent. Apply below to enter the Media Mafias Creator Academy and claim your stake in the global creator economy.
             </p>
           </div>
 
           <form 
-            className="space-y-8 bg-black p-8 md:p-12 border border-white/10 relative group"
+            className="bg-black p-8 md:p-12 border-2 border-[#E6B981]/30 shadow-[0_0_50px_rgba(230,185,129,0.05)] relative"
             onSubmit={(e) => {
               e.preventDefault();
-              alert("APPLICATION PROTOCOL INITIATED. We will contact you shortly.");
+              alert("VIP APPLICATION RECEIVED. Welcome to the Goldmine.");
             }}
           >
-            {/* Corner accents */}
-            <div className="absolute top-0 left-0 w-4 h-4 border-t-2 border-l-2 border-red-accent/50 group-hover:border-red-accent transition-colors" />
-            <div className="absolute bottom-0 right-0 w-4 h-4 border-b-2 border-r-2 border-red-accent/50 group-hover:border-red-accent transition-colors" />
+            {/* VIP Corner accents */}
+            <div className="absolute top-0 left-0 w-8 h-8 border-t-2 border-l-2 border-[#E6B981]" />
+            <div className="absolute top-0 right-0 w-8 h-8 border-t-2 border-r-2 border-[#E6B981]" />
+            <div className="absolute bottom-0 left-0 w-8 h-8 border-b-2 border-l-2 border-[#E6B981]" />
+            <div className="absolute bottom-0 right-0 w-8 h-8 border-b-2 border-r-2 border-[#E6B981]" />
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
               <div className="space-y-2">
-                <label className="font-mono text-xs text-secondary tracking-widest uppercase">Full Name [Legal]</label>
+                <label className="font-mono text-[10px] text-[#E6B981] tracking-widest uppercase">Full Name</label>
                 <input 
                   type="text" 
                   required
-                  className="w-full bg-neutral-950 border border-white/10 px-4 py-3 text-white font-sans focus:outline-none focus:border-red-accent transition-colors"
-                  placeholder="Enter your name"
+                  className="w-full bg-neutral-900/50 border-b border-white/20 px-4 py-3 text-white font-sans focus:outline-none focus:border-[#E6B981] focus:bg-neutral-900 transition-all"
+                  placeholder="Enter your legal name"
                 />
               </div>
               <div className="space-y-2">
-                <label className="font-mono text-xs text-secondary tracking-widest uppercase">Stage Name / Artist Alias</label>
+                <label className="font-mono text-[10px] text-[#E6B981] tracking-widest uppercase">Artist Alias</label>
                 <input 
                   type="text" 
-                  className="w-full bg-neutral-950 border border-white/10 px-4 py-3 text-white font-sans focus:outline-none focus:border-red-accent transition-colors"
-                  placeholder="Optional"
+                  className="w-full bg-neutral-900/50 border-b border-white/20 px-4 py-3 text-white font-sans focus:outline-none focus:border-[#E6B981] focus:bg-neutral-900 transition-all"
+                  placeholder="Your stage name"
                 />
               </div>
 
               <div className="space-y-2">
-                <label className="font-mono text-xs text-secondary tracking-widest uppercase">Email Address</label>
+                <label className="font-mono text-[10px] text-[#E6B981] tracking-widest uppercase">Email / Transmission Comms</label>
                 <input 
                   type="email" 
                   required
-                  className="w-full bg-neutral-950 border border-white/10 px-4 py-3 text-white font-sans focus:outline-none focus:border-red-accent transition-colors"
+                  className="w-full bg-neutral-900/50 border-b border-white/20 px-4 py-3 text-white font-sans focus:outline-none focus:border-[#E6B981] focus:bg-neutral-900 transition-all"
                   placeholder="transmission@email.com"
                 />
               </div>
               <div className="space-y-2">
-                <label className="font-mono text-xs text-secondary tracking-widest uppercase">Phone Number</label>
+                <label className="font-mono text-[10px] text-[#E6B981] tracking-widest uppercase">Direct Line (Phone)</label>
                 <input 
                   type="tel" 
                   required
-                  className="w-full bg-neutral-950 border border-white/10 px-4 py-3 text-white font-sans focus:outline-none focus:border-red-accent transition-colors"
+                  className="w-full bg-neutral-900/50 border-b border-white/20 px-4 py-3 text-white font-sans focus:outline-none focus:border-[#E6B981] focus:bg-neutral-900 transition-all"
                   placeholder="+91"
                 />
               </div>
 
               <div className="space-y-2">
-                <label className="font-mono text-xs text-secondary tracking-widest uppercase">City & State (Local Dialect)</label>
+                <label className="font-mono text-[10px] text-[#E6B981] tracking-widest uppercase">Region & Dialect Focus</label>
                 <input 
                   type="text" 
                   required
-                  className="w-full bg-neutral-950 border border-white/10 px-4 py-3 text-white font-sans focus:outline-none focus:border-red-accent transition-colors"
-                  placeholder="e.g. Rewa, MP (Bagheli)"
+                  className="w-full bg-neutral-900/50 border-b border-white/20 px-4 py-3 text-white font-sans focus:outline-none focus:border-[#E6B981] focus:bg-neutral-900 transition-all"
+                  placeholder="e.g. Bundeli, Bhojpuri, Awadhi..."
                 />
               </div>
               <div className="space-y-2">
-                <label className="font-mono text-xs text-secondary tracking-widest uppercase">Primary Skill</label>
+                <label className="font-mono text-[10px] text-[#E6B981] tracking-widest uppercase">Primary Talent</label>
                 <select 
                   required
-                  className="w-full bg-neutral-950 border border-white/10 px-4 py-3 text-white font-sans focus:outline-none focus:border-red-accent transition-colors appearance-none"
+                  className="w-full bg-neutral-900/50 border-b border-white/20 px-4 py-3 text-white font-sans focus:outline-none focus:border-[#E6B981] focus:bg-neutral-900 transition-all appearance-none"
                 >
                   <option value="" disabled selected>Select an option</option>
                   <option value="singer">Singer / Musician</option>
@@ -267,33 +266,35 @@ export default function CreatorProgramPage() {
               </div>
             </div>
 
-            <div className="space-y-2">
-              <label className="font-mono text-xs text-secondary tracking-widest uppercase">Portfolio / Social Media Link</label>
+            <div className="space-y-2 mb-8">
+              <label className="font-mono text-[10px] text-[#E6B981] tracking-widest uppercase">Portfolio Link (Instagram, YouTube, etc.)</label>
               <input 
                 type="url" 
-                className="w-full bg-neutral-950 border border-white/10 px-4 py-3 text-white font-sans focus:outline-none focus:border-red-accent transition-colors"
-                placeholder="https://instagram.com/..."
+                className="w-full bg-neutral-900/50 border-b border-white/20 px-4 py-3 text-white font-sans focus:outline-none focus:border-[#E6B981] focus:bg-neutral-900 transition-all"
+                placeholder="Paste your link here"
               />
             </div>
 
-            <div className="space-y-2">
-              <label className="font-mono text-xs text-secondary tracking-widest uppercase">Why do you want to join the Academy?</label>
+            <div className="space-y-2 mb-12">
+              <label className="font-mono text-[10px] text-[#E6B981] tracking-widest uppercase">Your Vision</label>
               <textarea 
                 required
-                rows={4}
-                className="w-full bg-neutral-950 border border-white/10 px-4 py-3 text-white font-sans focus:outline-none focus:border-red-accent transition-colors resize-none"
-                placeholder="Tell us about your cultural roots and global ambitions..."
+                rows={3}
+                className="w-full bg-neutral-900/50 border-b border-white/20 px-4 py-3 text-white font-sans focus:outline-none focus:border-[#E6B981] focus:bg-neutral-900 transition-all resize-none"
+                placeholder="Why are you ready for the global stage?"
               ></textarea>
             </div>
 
-            <div className="pt-4 border-t border-white/5">
-              <button 
-                type="submit"
-                className="w-full bg-red-accent hover:bg-white text-white hover:text-black font-display text-xl tracking-widest uppercase py-4 transition-all duration-300"
-              >
-                Submit Application
-              </button>
-            </div>
+            <button 
+              type="submit"
+              className="w-full bg-gradient-to-r from-[#C49A5A] via-[#E6B981] to-[#C49A5A] text-black hover:scale-[1.02] font-display text-2xl tracking-widest uppercase py-5 transition-all duration-300 shadow-[0_0_20px_rgba(230,185,129,0.3)] hover:shadow-[0_0_40px_rgba(230,185,129,0.6)]"
+            >
+              SUBMIT VIP APPLICATION
+            </button>
+            
+            <p className="text-center text-[#E6B981]/50 font-mono text-[10px] uppercase tracking-widest mt-6">
+              SECURE ENCRYPTED SUBMISSION
+            </p>
           </form>
         </div>
       </section>
