@@ -61,22 +61,22 @@ export const Footer = () => {
       {/* Distribution Partners */}
       <div className="max-w-6xl mx-auto mt-16 pt-12 border-t border-white/10 relative z-10">
         <h4 className="font-display text-base tracking-widest text-white uppercase text-center mb-8">Our Distribution Partner Platforms</h4>
-        <div className="flex flex-wrap justify-center items-center gap-8 md:gap-12 opacity-70">
+        <div className="flex flex-wrap justify-center items-center gap-10 md:gap-16 opacity-70">
           
           <div className="flex items-center justify-center hover:opacity-100 hover:text-white transition-all cursor-pointer group" title="Govt of India">
             <div className="w-10 h-10 flex items-center justify-center group-hover:scale-110 transition-transform">
-              <img 
-                src="/govt-of-india.svg" 
-                alt="Govt of India" 
-                className="w-full h-full object-contain filter grayscale brightness-200"
-              />
+              {/* Reliable Inline SVG for Govt of India (Ashoka Chakra placeholder) to prevent broken image links */}
+              <svg className="w-full h-full text-white opacity-80 group-hover:opacity-100" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+                <circle cx="12" cy="12" r="10" />
+                <circle cx="12" cy="12" r="2" fill="currentColor" />
+                <path d="M12 2v20M2 12h20M4.9 4.9l14.2 14.2M4.9 19.1L19.1 4.9" />
+              </svg>
             </div>
           </div>
 
           <div className="flex items-center justify-center hover:opacity-100 hover:text-[#0099FF] transition-all cursor-pointer group" title="Digital India">
-            <div className="w-16 h-8 flex items-center justify-center group-hover:scale-110 transition-transform">
-              {/* Fallback to stylized text since external image is blocked */}
-              <span className="font-display font-bold text-xl tracking-tighter uppercase text-white">DIGITAL<span className="text-[#0099FF]">INDIA</span></span>
+            <div className="flex items-center justify-center group-hover:scale-110 transition-transform">
+              <span className="font-display font-bold text-xl tracking-widest uppercase text-white whitespace-nowrap">DIGITAL <span className="text-[#0099FF]">INDIA</span></span>
             </div>
           </div>
 
