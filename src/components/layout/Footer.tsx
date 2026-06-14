@@ -120,11 +120,11 @@ export const Footer = () => {
       </div>
 
       <div className="max-w-6xl mx-auto mt-16 pt-8 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-4">
-        <p className="text-secondary text-xs font-mono uppercase tracking-widest">
+        <p className="text-secondary text-[10px] font-mono uppercase tracking-widest text-center md:text-left">
           © {new Date().getFullYear()} Media Mafias. All signals reserved.
         </p>
-        <p className="text-secondary/30 text-[10px] font-mono tracking-widest">
-          v1.0.0-DECENTRALIZED
+        <p className="text-secondary text-[10px] font-mono uppercase tracking-widest text-center md:text-right">
+          Media Mafias is a <a href="https://scalerxlab.com" target="_blank" rel="noopener noreferrer" className="underline hover:text-white transition-colors">ScalerX Lab</a> Ecosystem Infrastructure.
         </p>
       </div>
     </footer>
