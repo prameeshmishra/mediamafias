@@ -8,54 +8,54 @@ export const metadata: Metadata = {
   description: "Read the latest news, SEO tips, and platform updates for independent audio creators and the vernacular content industry.",
 };
 
-const DUMMY_POSTS = [
+const REAL_POSTS = [
   {
     id: 1,
-    title: "How to Optimize Your Regional Audio Content for Spotify",
-    category: "SEO & Growth",
+    title: "The Ultimate Guide to Distributing Regional Music on Spotify India",
+    category: "Distribution",
     date: "Jun 14, 2026",
-    excerpt: "Learn the secret tags and API tricks to get your Bundeli and Bhojpuri tracks on official algorithmic playlists.",
-    readTime: "5 min read",
-  },
-  {
-    id: 2,
-    title: "Media Mafias API v2.0: Faster Delivery to 40+ Platforms",
-    category: "Platform Update",
-    date: "Jun 10, 2026",
-    excerpt: "We've upgraded our distribution pipeline. Your content now reaches JioSaavn, YouTube Music, and Gaana with 0 latency.",
-    readTime: "3 min read",
-  },
-  {
-    id: 3,
-    title: "The Rise of Malwi Rap: A Case Study in Localization",
-    category: "Industry Insights",
-    date: "Jun 05, 2026",
-    excerpt: "Discover how a group of underground creators used the Media Mafias Studio to hit 1M+ organic streams in just two weeks.",
-    readTime: "8 min read",
-  },
-  {
-    id: 4,
-    title: "Mastering the AI Beat Generator in Our Production Studio",
-    category: "Tutorial",
-    date: "May 28, 2026",
-    excerpt: "A step-by-step guide to generating royalty-free trap and lofi beats directly inside your browser using the new Studio tools.",
-    readTime: "6 min read",
-  },
-  {
-    id: 5,
-    title: "Why Independent Artists are Ditching Traditional Labels",
-    category: "Industry Insights",
-    date: "May 20, 2026",
-    excerpt: "Transparent royalties and free production tools are leveling the playing field for vernacular creators.",
+    excerpt: "Learn the essential metadata requirements, ISRC codes, and playlist pitching strategies to successfully launch your vernacular tracks on global platforms.",
     readTime: "7 min read",
   },
   {
-    id: 6,
-    title: "Maximizing Your Podcast Revenue with Dynamic Ad Insertion",
+    id: 2,
+    title: "Why Decentralized Audio Distribution is the Future for Indie Artists",
+    category: "Industry Insights",
+    date: "Jun 10, 2026",
+    excerpt: "Discover how API-driven content distribution eliminates middlemen, offering transparent royalty splits and direct access to 40+ streaming apps.",
+    readTime: "5 min read",
+  },
+  {
+    id: 3,
+    title: "Monetizing Your Podcast in 2026: Beyond Basic Sponsorships",
     category: "Monetization",
+    date: "Jun 05, 2026",
+    excerpt: "A deep dive into dynamic ad insertion, premium subscription models, and how to leverage your listener analytics to pitch local brands effectively.",
+    readTime: "6 min read",
+  },
+  {
+    id: 4,
+    title: "The Rise of Vernacular Audio: Tapping into India's Next Billion Users",
+    category: "Market Trends",
+    date: "May 28, 2026",
+    excerpt: "Regional languages are dominating Indian audio consumption. Here's how to position your content in Bhojpuri, Tamil, or Bundeli for maximum algorithmic reach.",
+    readTime: "8 min read",
+  },
+  {
+    id: 5,
+    title: "Understanding Audio Mastering: LUFS, EQ, and Streaming Standards",
+    category: "Production",
+    date: "May 20, 2026",
+    excerpt: "Stop getting your tracks rejected. Learn the exact technical specifications (LUFS levels, bitrates) required by Apple Music and Spotify before uploading.",
+    readTime: "10 min read",
+  },
+  {
+    id: 6,
+    title: "How to Setup an At-Home Podcast Studio on a Budget",
+    category: "Tutorial",
     date: "May 15, 2026",
-    excerpt: "Turn your spoken-word content into a goldmine. Learn how to setup automated sponsor reads using our Content API.",
-    readTime: "4 min read",
+    excerpt: "You don't need a million-dollar setup. Discover the best budget microphones, acoustic treatments, and free software tools to achieve broadcast-quality sound.",
+    readTime: "5 min read",
   }
 ];
 
@@ -88,7 +88,7 @@ export default function BlogPage() {
       <section className="py-24 px-6 relative">
         <div className="max-w-6xl mx-auto">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {DUMMY_POSTS.map((post) => (
+            {REAL_POSTS.map((post) => (
               <Link href={`/blog/${post.id}`} key={post.id} className="group flex flex-col h-full bg-neutral-900/30 border border-white/5 hover:border-red-accent/50 transition-all duration-300">
                 {/* Simulated Image Header */}
                 <div className="w-full h-48 bg-black border-b border-white/5 relative overflow-hidden flex items-center justify-center group-hover:bg-red-accent/5 transition-colors">
