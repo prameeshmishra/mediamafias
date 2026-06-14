@@ -62,17 +62,24 @@ export const Footer = () => {
         <div className="flex flex-wrap justify-center items-center gap-6 md:gap-8 opacity-70">
           
           <div className="flex items-center gap-2 hover:opacity-100 hover:text-white transition-all cursor-pointer group">
-            <svg className="w-5 h-5 group-hover:scale-110 transition-transform text-white" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" d="M3 21h18M5 21V7l7-4 7 4v14M8 21v-4a2 2 0 012-2h4a2 2 0 012 2v4"/>
-            </svg>
+            <div className="w-5 h-5 flex items-center justify-center group-hover:scale-110 transition-transform">
+              <img 
+                src="https://upload.wikimedia.org/wikipedia/commons/5/55/Emblem_of_India.svg" 
+                alt="Govt of India" 
+                className="w-full h-full object-contain filter grayscale brightness-200"
+              />
+            </div>
             <span className="font-display tracking-widest uppercase text-xs">Govt of India</span>
           </div>
 
-          <div className="flex items-center gap-2 hover:opacity-100 hover:text-white transition-all cursor-pointer group">
-            <svg className="w-5 h-5 group-hover:scale-110 transition-transform text-[#0099FF]" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" d="M12 11c0 3.517-1.009 6.799-2.753 9.571m-3.44-2.04l.054-.09A13.916 13.916 0 008 11a4 4 0 118 0c0 1.017-.07 2.019-.203 3m-2.118 6.844A21.88 21.88 0 0015.171 17m3.839 1.132c.645-2.266.99-4.659.99-7.132A8 8 0 008 4.07M3 15.364c.64-1.319 1-2.8 1-4.364 0-1.457.39-2.823 1.07-4"/>
-            </svg>
-            <span className="font-display tracking-widest uppercase text-xs">Digital India</span>
+          <div className="flex items-center gap-2 hover:opacity-100 hover:text-[#0099FF] transition-all cursor-pointer group">
+            <div className="w-12 h-5 flex items-center justify-center group-hover:scale-110 transition-transform">
+              <img 
+                src="https://upload.wikimedia.org/wikipedia/commons/e/e0/Digital_India_logo.svg" 
+                alt="Digital India" 
+                className="w-full h-full object-contain"
+              />
+            </div>
           </div>
 
           <div className="flex items-center gap-2 hover:opacity-100 hover:text-red-accent transition-all cursor-pointer group">
