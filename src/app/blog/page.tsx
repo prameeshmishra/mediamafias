@@ -8,56 +8,7 @@ export const metadata: Metadata = {
   description: "Read the latest news, SEO tips, and platform updates for independent audio creators and the vernacular content industry.",
 };
 
-const REAL_POSTS = [
-  {
-    id: 1,
-    title: "The Ultimate Guide to Distributing Regional Music on Spotify India",
-    category: "Distribution",
-    date: "Jun 14, 2026",
-    excerpt: "Learn the essential metadata requirements, ISRC codes, and playlist pitching strategies to successfully launch your vernacular tracks on global platforms.",
-    readTime: "7 min read",
-  },
-  {
-    id: 2,
-    title: "Why Decentralized Audio Distribution is the Future for Indie Artists",
-    category: "Industry Insights",
-    date: "Jun 10, 2026",
-    excerpt: "Discover how API-driven content distribution eliminates middlemen, offering transparent royalty splits and direct access to 40+ streaming apps.",
-    readTime: "5 min read",
-  },
-  {
-    id: 3,
-    title: "Monetizing Your Podcast in 2026: Beyond Basic Sponsorships",
-    category: "Monetization",
-    date: "Jun 05, 2026",
-    excerpt: "A deep dive into dynamic ad insertion, premium subscription models, and how to leverage your listener analytics to pitch local brands effectively.",
-    readTime: "6 min read",
-  },
-  {
-    id: 4,
-    title: "The Rise of Vernacular Audio: Tapping into India's Next Billion Users",
-    category: "Market Trends",
-    date: "May 28, 2026",
-    excerpt: "Regional languages are dominating Indian audio consumption. Here's how to position your content in Bhojpuri, Tamil, or Bundeli for maximum algorithmic reach.",
-    readTime: "8 min read",
-  },
-  {
-    id: 5,
-    title: "Understanding Audio Mastering: LUFS, EQ, and Streaming Standards",
-    category: "Production",
-    date: "May 20, 2026",
-    excerpt: "Stop getting your tracks rejected. Learn the exact technical specifications (LUFS levels, bitrates) required by Apple Music and Spotify before uploading.",
-    readTime: "10 min read",
-  },
-  {
-    id: 6,
-    title: "How to Setup an At-Home Podcast Studio on a Budget",
-    category: "Tutorial",
-    date: "May 15, 2026",
-    excerpt: "You don't need a million-dollar setup. Discover the best budget microphones, acoustic treatments, and free software tools to achieve broadcast-quality sound.",
-    readTime: "5 min read",
-  }
-];
+import { REAL_POSTS } from "@/lib/data/blogs";
 
 export default function BlogPage() {
   return (
