@@ -32,9 +32,11 @@ export const Footer = () => {
           <ul className="space-y-4 font-mono text-sm uppercase tracking-widest text-secondary">
             <li><Link href="/" className="hover:text-white transition-all">Home</Link></li>
             <li><Link href="/academy" className="hover:text-red-accent transition-colors">Creator Academy</Link></li>
+            <li><Link href="/studio" className="hover:text-red-accent transition-colors">Production Studio</Link></li>
             <li><Link href="/spotlight" className="hover:text-white transition-all">Spotlight</Link></li>
             <li><Link href="/distribution" className="hover:text-red-accent transition-colors">Distribution</Link></li>
             <li><Link href="/api-pipeline" className="hover:text-red-accent transition-colors">Content API</Link></li>
+            <li><Link href="/blog" className="hover:text-white transition-all">Blog / Updates</Link></li>
             <li><Link href="/about" className="hover:text-white transition-all">About</Link></li>
             <li><Link href="/contact" className="hover:text-red-accent transition-all">Contact / Legal</Link></li>
           </ul>
