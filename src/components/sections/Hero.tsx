@@ -8,9 +8,6 @@ import Image from "next/image";
 
 export const Hero = () => {
   const [matrixText, setMatrixText] = React.useState("");
-  const [isPlaying, setIsPlaying] = React.useState(false);
-  const audioRef = React.useRef<HTMLAudioElement | null>(null);
-  
   React.useEffect(() => {
     const chars = "01ABCDEFGHIJKLMNOPQRSTUVWXYZ01";
     let iterations = 0;
@@ -22,30 +19,10 @@ export const Hero = () => {
       if (iterations > 100) clearInterval(interval);
     }, 50);
 
-    // Initialize audio object
-    if (typeof window !== "undefined") {
-      audioRef.current = new Audio("/Latency Buffering.mp3");
-      audioRef.current.onended = () => setIsPlaying(false);
-    }
-
     return () => {
       clearInterval(interval);
-      if (audioRef.current) {
-        audioRef.current.pause();
-      }
     };
   }, []);
-
-  const handlePlayAudio = () => {
-    if (isPlaying || !audioRef.current) return;
-    
-    setIsPlaying(true);
-    audioRef.current.currentTime = 0;
-    audioRef.current.play().catch(err => {
-      console.error("Audio playback blocked by browser:", err);
-      setIsPlaying(false);
-    });
-  };
 
   return (
     <section className="relative min-h-[100vh] flex flex-col items-center justify-center pt-20 overflow-hidden bg-black border-b border-red-accent/10">
@@ -130,76 +107,25 @@ export const Hero = () => {
           initial={{ opacity: 0, scale: 0.9, x: 30 }}
           animate={{ opacity: 1, scale: 1, x: 0 }}
           transition={{ duration: 1, delay: 0.4, ease: "easeOut" }}
-          className="lg:col-span-5 flex justify-center items-center relative cursor-pointer group mt-12 lg:mt-0"
-          onClick={handlePlayAudio}
+          className="lg:col-span-5 flex justify-center items-center relative mt-12 lg:mt-0"
         >
-          {/* Rotating radar/scanning effect behind logo */}
-          <motion.div 
-            animate={{ 
-              rotate: 360,
-              scale: isPlaying ? [1, 1.1, 1] : 1
-            }}
-            transition={{ 
-              rotate: { duration: 20, repeat: Infinity, ease: "linear" },
-              scale: { duration: 0.3, repeat: isPlaying ? Infinity : 0 }
-            }}
-            className="absolute inset-0 border border-red-accent/10 rounded-full w-[280px] h-[280px] md:w-[350px] md:h-[350px] lg:w-[400px] lg:h-[400px] m-auto border-t-red-accent/40"
-          />
-          <motion.div 
-            animate={{ rotate: -360 }}
-            transition={{ duration: 15, repeat: Infinity, ease: "linear" }}
-            className="absolute inset-0 border border-white/5 rounded-full w-[240px] h-[240px] md:w-[300px] md:h-[300px] lg:w-[350px] lg:h-[350px] m-auto border-b-white/20"
-          />
-          
-          <div className="relative z-10 flex items-center justify-center w-[200px] h-[200px] md:w-[250px] md:h-[250px] lg:w-[300px] lg:h-[300px]">
-            {/* Naked Hi-Fi Speaker Transformation */}
-            <motion.div
-               initial={false}
-               animate={{ 
-                 opacity: isPlaying ? 1 : 0, 
-                 scale: isPlaying ? 1 : 0.2 
-               }}
-               transition={{ duration: 0.4, type: "spring", bounce: 0.4 }}
-               className="absolute inset-0 rounded-full bg-neutral-900 border-[8px] lg:border-[16px] border-[#050505] shadow-[inset_0_20px_50px_rgba(0,0,0,0.9),_0_0_60px_rgba(192,57,43,0.4)] flex items-center justify-center overflow-hidden"
-            >
-               {/* Pumping Speaker Cone */}
-               <motion.div 
-                 animate={isPlaying ? { scale: [1, 1.05, 1, 1.08, 1] } : { scale: 1 }}
-                 transition={{ duration: 0.4, repeat: isPlaying ? Infinity : 0, ease: "easeInOut" }}
-                 className="w-[90%] h-[90%] rounded-full bg-[radial-gradient(circle_at_center,#333_0%,#0a0a0a_80%)] shadow-[inset_0_0_40px_rgba(0,0,0,1)] flex items-center justify-center border-[3px] lg:border-[6px] border-[#111]"
-               >
-                 {/* Inner Rubber Surround */}
-                 <div className="w-[85%] h-[85%] rounded-full shadow-[inset_0_10px_20px_rgba(0,0,0,0.8)] border border-white/5 bg-[radial-gradient(circle_at_center,#1a1a1a_0%,#000_100%)] flex items-center justify-center" />
-               </motion.div>
-            </motion.div>
-
-            {/* The Actual Logo (Acts as Dust Cap when playing) */}
-            <motion.div
-              animate={{ 
-                scale: isPlaying ? 0.35 : 1, 
-              }}
-              transition={{ duration: 0.4, type: "spring", bounce: 0.3 }}
-              className={`relative z-20 flex flex-col items-center justify-center transition-all w-full h-full ${
-                isPlaying 
-                  ? 'mix-blend-normal drop-shadow-[0_0_10px_rgba(0,0,0,0.8)]' 
-                  : 'mix-blend-screen drop-shadow-[0_0_30px_rgba(192,57,43,0.4)] group-hover:scale-110'
-              }`}
-            >
+          {/* Simple Black Circle with Border */}
+          <div className="absolute inset-0 border border-white/5 rounded-full w-[200px] h-[200px] md:w-[250px] md:h-[250px] lg:w-[300px] lg:h-[300px] m-auto bg-black flex items-center justify-center shadow-[0_0_30px_rgba(192,57,43,0.1)]">
+            
+            {/* The Transparent Logo */}
+            <div className="relative w-[150px] h-[150px] md:w-[180px] md:h-[180px] lg:w-[220px] lg:h-[220px] mix-blend-screen opacity-90">
               <Image 
                 src="/Logo Main.png" 
                 alt="Media Mafias Logo" 
                 fill
-                className="object-contain drop-shadow-2xl"
+                className="object-contain"
                 priority
               />
-
-              {!isPlaying && (
-                <div className="absolute -bottom-8 whitespace-nowrap text-[9px] lg:text-[10px] font-mono text-red-accent/80 tracking-[0.3em] uppercase opacity-100 lg:opacity-0 group-hover:opacity-100 transition-opacity duration-300 animate-pulse">
-                  [ Click to Ignite ]
-                </div>
-              )}
-            </motion.div>
+            </div>
           </div>
+          
+          {/* Spacer to maintain height since we're using absolute positioning for the circle */}
+          <div className="w-[200px] h-[200px] md:w-[250px] md:h-[250px] lg:w-[300px] lg:h-[300px]" />
         </motion.div>
       </div>
 

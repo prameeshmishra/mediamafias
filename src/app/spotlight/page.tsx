@@ -78,57 +78,71 @@ export default function SpotlightPage() {
         </div>
       </section>
 
-      {/* Artist Grid */}
-      <section className="py-24 px-6">
-        <div className="max-w-7xl mx-auto">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-8">
+      {/* Artist Chart List */}
+      <section className="py-24 px-6 bg-neutral-950">
+        <div className="max-w-5xl mx-auto">
+          
+          <div className="flex justify-between items-end mb-8 border-b border-white/10 pb-4">
+            <h2 className="font-display text-3xl uppercase tracking-widest text-white">Top 50 Syndicate Chart</h2>
+            <div className="text-secondary font-mono text-sm">Updated Real-time</div>
+          </div>
+
+          <div className="flex flex-col gap-4">
             {ARTISTS.map((artist, idx) => (
               <motion.div
                 key={artist.id}
-                initial={{ opacity: 0, scale: 0.95 }}
-                whileInView={{ opacity: 1, scale: 1 }}
+                initial={{ opacity: 0, x: -20 }}
+                whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: idx * 0.1 }}
-                className="bg-neutral-950 border border-white/10 p-8 relative group hover:border-red-accent/50 transition-colors"
+                transition={{ duration: 0.4, delay: idx * 0.05 }}
+                className="group flex items-center justify-between bg-black border border-white/5 p-4 hover:border-red-accent/50 hover:bg-red-accent/5 transition-all"
               >
-                {/* Status Badge */}
-                <div className="absolute top-6 right-6 border border-white/20 px-3 py-1 text-[10px] font-mono tracking-widest uppercase bg-black text-secondary">
-                  {artist.status}
-                </div>
-
-                <div className="mb-6">
-                  <h2 className="font-display text-4xl uppercase tracking-wider mb-2">{artist.name}</h2>
-                  <p className="text-red-accent font-mono text-sm uppercase tracking-widest">Dialect: {artist.dialect}</p>
-                </div>
-
-                {/* Metrics */}
-                <div className="grid grid-cols-2 gap-4 mb-8">
-                  <div className="bg-black border border-white/5 p-4">
-                    <div className="text-[10px] text-secondary font-mono tracking-widest uppercase mb-1">Total Streams</div>
-                    <div className="text-2xl font-bold font-mono">{artist.streams}</div>
+                {/* Left Side: Rank & Info */}
+                <div className="flex items-center gap-6">
+                  <div className="text-4xl font-display text-white/20 group-hover:text-red-accent transition-colors w-12 text-center">
+                    {idx + 1}
                   </div>
-                  <div className="bg-black border border-white/5 p-4">
-                    <div className="text-[10px] text-secondary font-mono tracking-widest uppercase mb-1">Engagement Rate</div>
-                    <div className="text-2xl font-bold font-mono text-green-400">{artist.engagement}</div>
+                  
+                  <div>
+                    <div className="flex items-center gap-3 mb-1">
+                      <h3 className="font-display text-2xl uppercase tracking-widest text-white group-hover:text-red-accent transition-colors">{artist.name}</h3>
+                      <span className="text-[10px] font-mono tracking-widest uppercase border border-white/20 px-2 py-0.5 text-secondary">
+                        {artist.dialect}
+                      </span>
+                    </div>
+                    <div className="text-sm font-mono text-secondary">
+                      <span className="text-white">Top Track:</span> {artist.topTrack}
+                    </div>
                   </div>
                 </div>
 
-                <div className="mb-8 border-l-2 border-red-accent pl-4">
-                  <div className="text-[10px] text-secondary font-mono tracking-widest uppercase mb-1">Top Performing Track</div>
-                  <div className="text-lg text-white font-mono">{artist.topTrack}</div>
+                {/* Right Side: Metrics & Actions */}
+                <div className="flex items-center gap-8">
+                  <div className="hidden md:flex flex-col items-end">
+                    <div className="text-sm font-bold font-mono text-white">{artist.streams} Streams</div>
+                    <div className="text-[10px] font-mono text-green-400 uppercase tracking-widest">{artist.engagement} Engagement</div>
+                  </div>
+
+                  <div className="flex items-center gap-2">
+                    <button className="p-3 border border-white/10 hover:bg-red-accent hover:border-red-accent text-secondary hover:text-white transition-all group/btn rounded-sm">
+                      <svg className="w-5 h-5 group-hover/btn:scale-110 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+                      </svg>
+                    </button>
+                    <button className="p-3 border border-white/10 hover:bg-white/10 text-secondary hover:text-white transition-all group/btn rounded-sm">
+                      <svg className="w-5 h-5 group-hover/btn:scale-110 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z" />
+                      </svg>
+                    </button>
+                  </div>
                 </div>
 
-                {/* Engagement Actions */}
-                <div className="flex gap-4 border-t border-white/10 pt-6">
-                  <Button variant="primary" className="flex-1">
-                    BOOST ARTIST
-                  </Button>
-                  <Button variant="outline" className="flex-1">
-                    VIEW ANALYTICS
-                  </Button>
-                </div>
               </motion.div>
             ))}
+          </div>
+          
+          <div className="mt-8 text-center">
+             <Button variant="outline">LOAD MORE ARTISTS</Button>
           </div>
         </div>
       </section>
