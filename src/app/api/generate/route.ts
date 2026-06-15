@@ -48,34 +48,53 @@ export async function POST(req: Request) {
        textToSynthesize = "Please provide a valid script to read.";
     }
 
-    // Generate Audio using node-edge-tts (Microsoft Neural TTS)
-    const voiceId = ttsDirectives && ttsDirectives.toLowerCase().includes("male") ? 'hi-IN-MadhurNeural' : 'hi-IN-SwaraNeural';
-    let pitch = 'default';
-    let rate = 'default';
-
-    if (ttsDirectives) {
-      const dirs = ttsDirectives.toLowerCase();
-      if (dirs.includes("excited")) pitch = '+10%';
-      if (dirs.includes("serious") || dirs.includes("deep")) pitch = '-10%';
-      
-      if (dirs.includes("slow") || dirs.includes("storyteller")) rate = '-15%';
-      if (dirs.includes("fast")) rate = '+15%';
+    // Generate Audio using ElevenLabs TTS (Premium Emotional AI Voices)
+    const ELEVENLABS_API_KEY = process.env.ELEVENLABS_API_KEY;
+    if (!ELEVENLABS_API_KEY) {
+      return NextResponse.json({ error: "Missing ELEVENLABS_API_KEY in environment variables" }, { status: 500 });
     }
 
-    const tts = new EdgeTTS({
-      voice: voiceId,
-      lang: 'hi-IN',
-      outputFormat: 'audio-24khz-48kbitrate-mono-mp3',
-      pitch: pitch,
-      rate: rate,
+    // Default: Adam (Male, Narrative), Bella (Female, Soft)
+    const voiceId = ttsDirectives && ttsDirectives.toLowerCase().includes("female") ? 'EXAVITQu4vr4xnSDxMaL' : 'pNInz6obpgDQGcFmaJgB';
+    
+    // Emotion mapping for stability and similarity boost
+    let stability = 0.5; // default
+    let similarity_boost = 0.75;
+    
+    if (ttsDirectives) {
+      const dirs = ttsDirectives.toLowerCase();
+      if (dirs.includes("excited") || dirs.includes("dramatic")) {
+        stability = 0.3; // More emotional variation
+      }
+      if (dirs.includes("serious") || dirs.includes("news") || dirs.includes("flat")) {
+        stability = 0.8; // More stable/monotone
+      }
+    }
+
+    const ttsResponse = await fetch(`https://api.elevenlabs.io/v1/text-to-speech/${voiceId}`, {
+      method: "POST",
+      headers: {
+        "xi-api-key": ELEVENLABS_API_KEY,
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        text: textToSynthesize,
+        model_id: "eleven_multilingual_v2",
+        voice_settings: {
+          stability: stability,
+          similarity_boost: similarity_boost
+        }
+      })
     });
 
-    const tempFilePath = path.join(os.tmpdir(), `tts_${Date.now()}.mp3`);
-    await tts.ttsPromise(textToSynthesize, tempFilePath);
+    if (!ttsResponse.ok) {
+      const errText = await ttsResponse.text();
+      console.error("ElevenLabs API Error:", errText);
+      return NextResponse.json({ error: "Failed to generate audio from ElevenLabs" }, { status: 500 });
+    }
 
-    const buffer = fs.readFileSync(tempFilePath);
-    const combinedBase64 = buffer.toString('base64');
-    fs.unlinkSync(tempFilePath); // Cleanup
+    const audioArrayBuffer = await ttsResponse.arrayBuffer();
+    const combinedBase64 = Buffer.from(audioArrayBuffer).toString('base64');
     const audioUrl = `data:audio/mp3;base64,${combinedBase64}`;
 
     // Generate Background Music via Hugging Face API (MusicGen)
