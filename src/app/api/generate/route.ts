@@ -97,50 +97,25 @@ export async function POST(req: Request) {
     const combinedBase64 = Buffer.from(audioArrayBuffer).toString('base64');
     const audioUrl = `data:audio/mp3;base64,${combinedBase64}`;
 
-    // Generate Background Music via Hugging Face API (MusicGen)
+    // Generate Background Music (Instant Local Library Fallback)
+    // HuggingFace Free API is too slow for Vercel/Local dev (causes 503 timeouts). 
+    // We use a curated list of royalty-free links to instantly provide dynamic BGM.
+    const LOCAL_BGM_LIBRARY: Record<string, string[]> = {
+      "Lo-Fi / Chill": [2,4,10,14,15].map(i => `https://www.soundhelix.com/examples/mp3/SoundHelix-Song-${i}.mp3`),
+      "Lofi Chill": [2,4,10,14,15].map(i => `https://www.soundhelix.com/examples/mp3/SoundHelix-Song-${i}.mp3`),
+      "Tense Ambient": [1,3,8,13,16].map(i => `https://www.soundhelix.com/examples/mp3/SoundHelix-Song-${i}.mp3`),
+      "Upbeat Corporate": [5,6,7,9,11,12,17].map(i => `https://www.soundhelix.com/examples/mp3/SoundHelix-Song-${i}.mp3`),
+      "Trap / Hip Hop": [11,12,17].map(i => `https://www.soundhelix.com/examples/mp3/SoundHelix-Song-${i}.mp3`),
+      "Bhojpuri Bass": [7,9,16].map(i => `https://www.soundhelix.com/examples/mp3/SoundHelix-Song-${i}.mp3`),
+      "Bundeli Folk": [4,15].map(i => `https://www.soundhelix.com/examples/mp3/SoundHelix-Song-${i}.mp3`),
+    };
+
     let bgUrl = null;
-    if ((musicPrompt || (bgMusic && bgMusic !== "None")) && process.env.HUGGINGFACE_API_KEY) {
-      const hfPrompt = musicPrompt ? musicPrompt : `${genre ? genre + ', ' : ''}${energy ? energy + ', ' : ''}${tempo ? tempo + ', ' : ''}${bgMusic} instrumental`;
-      console.log("Generating AI Music via HF API:", hfPrompt);
-      
-      let attempts = 0;
-      let success = false;
-      
-      while (attempts < 3 && !success) {
-        try {
-          const hfResponse = await fetch("https://api-inference.huggingface.co/models/facebook/musicgen-small", {
-            method: "POST",
-            headers: { 
-              "Authorization": `Bearer ${process.env.HUGGINGFACE_API_KEY}`,
-              "Content-Type": "application/json"
-            },
-            body: JSON.stringify({ inputs: hfPrompt })
-          });
-          
-          if (hfResponse.ok) {
-            const arrayBuffer = await hfResponse.arrayBuffer();
-            const buffer = Buffer.from(arrayBuffer);
-            bgUrl = `data:audio/wav;base64,${buffer.toString('base64')}`;
-            console.log("HF Music Generated Successfully");
-            success = true;
-          } else {
-            const errorText = await hfResponse.text();
-            console.error(`HF API Error (Attempt ${attempts + 1}):`, errorText);
-            
-            // Handle "Model is loading" cold start
-            if (hfResponse.status === 503 && errorText.includes('currently loading')) {
-              console.log("Model is loading, waiting 15 seconds before retry...");
-              await new Promise(resolve => setTimeout(resolve, 15000));
-              attempts++;
-            } else {
-              break; // Break on other errors (like invalid token)
-            }
-          }
-        } catch(e) {
-          console.error(`HF API Exception (Attempt ${attempts + 1}):`, e);
-          break;
-        }
-      }
+    const selectedMood = genre || bgMusic;
+    if (selectedMood && selectedMood !== "None") {
+       const trackList = LOCAL_BGM_LIBRARY[selectedMood] || LOCAL_BGM_LIBRARY["Lo-Fi / Chill"];
+       bgUrl = trackList[Math.floor(Math.random() * trackList.length)];
+       console.log("Selected Instant AI BGM:", bgUrl);
     }
 
     return NextResponse.json({
