@@ -99,8 +99,8 @@ export async function POST(req: Request) {
 
     // Generate Background Music via Hugging Face API (MusicGen)
     let bgUrl = null;
-    if ((musicPrompt || (genre && bgMusic)) && process.env.HUGGINGFACE_API_KEY) {
-      const hfPrompt = musicPrompt ? musicPrompt : `${genre}, ${energy || 'Medium energy'}, ${tempo || '120 BPM'}, ${bgMusic} instrumental`;
+    if ((musicPrompt || (bgMusic && bgMusic !== "None")) && process.env.HUGGINGFACE_API_KEY) {
+      const hfPrompt = musicPrompt ? musicPrompt : `${genre ? genre + ', ' : ''}${energy ? energy + ', ' : ''}${tempo ? tempo + ', ' : ''}${bgMusic} instrumental`;
       console.log("Generating AI Music via HF API:", hfPrompt);
       
       let attempts = 0;
