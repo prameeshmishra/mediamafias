@@ -1,8 +1,12 @@
 import { NextResponse } from 'next/server';
-import { EdgeTTS } from 'node-edge-tts';
+import textToSpeech from '@google-cloud/text-to-speech';
 import fs from 'fs';
 import path from 'path';
-import os from 'os';
+
+const ttsClient = new textToSpeech.TextToSpeechClient({
+  keyFilename: path.join(process.cwd(), 'google-credentials.json')
+});
+
 export async function POST(req: Request) {
   try {
     const body = await req.json();
@@ -48,34 +52,27 @@ export async function POST(req: Request) {
        textToSynthesize = "Please provide a valid script to read.";
     }
 
-    // Generate Audio using node-edge-tts (Microsoft Neural TTS)
-    const voiceId = ttsDirectives && ttsDirectives.toLowerCase().includes("male") ? 'hi-IN-MadhurNeural' : 'hi-IN-SwaraNeural';
-    let pitch = 'default';
-    let rate = 'default';
+    // Generate Audio using Google Cloud Text-to-Speech (Neural2/WaveNet)
+    const voiceId = ttsDirectives && ttsDirectives.toLowerCase().includes("male") ? 'hi-IN-Neural2-B' : 'hi-IN-Neural2-A';
+    let pitch = 0.0;
+    let speakingRate = 1.0;
 
     if (ttsDirectives) {
       const dirs = ttsDirectives.toLowerCase();
-      if (dirs.includes("excited")) pitch = '+10%';
-      if (dirs.includes("serious") || dirs.includes("deep")) pitch = '-10%';
+      if (dirs.includes("excited")) pitch = 2.0;
+      if (dirs.includes("serious") || dirs.includes("deep")) pitch = -3.0;
       
-      if (dirs.includes("slow") || dirs.includes("storyteller")) rate = '-15%';
-      if (dirs.includes("fast")) rate = '+15%';
+      if (dirs.includes("slow") || dirs.includes("storyteller")) speakingRate = 0.85;
+      if (dirs.includes("fast")) speakingRate = 1.15;
     }
 
-    const tts = new EdgeTTS({
-      voice: voiceId,
-      lang: 'hi-IN',
-      outputFormat: 'audio-24khz-48kbitrate-mono-mp3',
-      pitch: pitch,
-      rate: rate,
+    const [response] = await ttsClient.synthesizeSpeech({
+      input: { text: textToSynthesize },
+      voice: { languageCode: 'hi-IN', name: voiceId },
+      audioConfig: { audioEncoding: 'MP3', pitch, speakingRate },
     });
 
-    const tempFilePath = path.join(os.tmpdir(), `tts_${Date.now()}.mp3`);
-    await tts.ttsPromise(textToSynthesize, tempFilePath);
-
-    const buffer = fs.readFileSync(tempFilePath);
-    const combinedBase64 = buffer.toString('base64');
-    fs.unlinkSync(tempFilePath); // Cleanup
+    const combinedBase64 = Buffer.from(response.audioContent as Uint8Array).toString('base64');
     const audioUrl = `data:audio/mp3;base64,${combinedBase64}`;
 
     // Generate Background Music via Hugging Face API (MusicGen)
