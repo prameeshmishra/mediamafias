@@ -25,6 +25,7 @@ export default function WorkspacePage() {
   const [isGenerating, setIsGenerating] = useState(false);
   const [generatedPrompt, setGeneratedPrompt] = useState("");
   const [audioResult, setAudioResult] = useState<string | null>(null);
+  const [bgAudioResult, setBgAudioResult] = useState<string | null>(null);
 
   // Auto-generate the master prompt whenever parameters change
   useEffect(() => {
@@ -65,18 +66,22 @@ export default function WorkspacePage() {
   const handleProduce = async () => {
     setIsGenerating(true);
     setAudioResult(null);
+    setBgAudioResult(null);
     
     try {
       const response = await fetch("/api/generate", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ prompt: generatedPrompt, format, script })
+        body: JSON.stringify({ prompt: generatedPrompt, format, script, genre, energy, tempo, bgMusic })
       });
       
       const data = await response.json();
       
       if (data.success && data.audioUrl) {
         setAudioResult(data.audioUrl);
+        if (data.bgUrl) {
+          setBgAudioResult(data.bgUrl);
+        }
       } else {
         alert("Generation failed: " + (data.error || "Unknown error"));
       }
@@ -320,14 +325,14 @@ export default function WorkspacePage() {
                   />
 
                   {/* Hidden Background Music Player */}
-                  {bgMusic !== "None" && format !== "song" && (
+                  {(bgMusic !== "None" || format === "song") && (
                     <audio 
                       id="bg-audio-player"
                       loop
                       src={
-                        bgMusic === "Lo-Fi / Chill" ? "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3" :
+                        bgAudioResult || (bgMusic === "Lo-Fi / Chill" ? "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3" :
                         bgMusic === "Tense Ambient" ? "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-8.mp3" :
-                        bgMusic === "Upbeat Corporate" ? "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-9.mp3" : ""
+                        bgMusic === "Upbeat Corporate" ? "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-9.mp3" : "")
                       } 
                     />
                   )}

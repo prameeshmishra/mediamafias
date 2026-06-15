@@ -4,7 +4,7 @@ import * as googleTTS from 'google-tts-api';
 export async function POST(req: Request) {
   try {
     const body = await req.json();
-    const { prompt, format, script } = body;
+    const { prompt, format, script, genre, energy, tempo, bgMusic } = body;
 
     // Use the raw script instead of the full system prompt if available
     const rawContent = script || prompt;
@@ -14,7 +14,6 @@ export async function POST(req: Request) {
     }
 
     // "Suno-like Jugaad": Clean the script to remove any emotional or structure tags like [Outro], (Pause), SYSTEM COMMAND: etc.
-    // This regex removes anything between brackets [] and parentheses ()
     let textToSynthesize = rawContent
       .replace(/\[.*?\]/g, '')
       .replace(/\(.*?\)/g, '')
@@ -30,7 +29,6 @@ export async function POST(req: Request) {
       .replace(/- Background Track:.*?\n/g, '')
       .trim();
 
-    // If after cleaning it's empty, return error
     if (!textToSynthesize) {
        textToSynthesize = "Please provide a valid script to read.";
     }
@@ -40,35 +38,50 @@ export async function POST(req: Request) {
       lang: 'hi',
       slow: false,
       host: 'https://translate.google.com',
-      splitPunct: ',.?!', // Split text intelligently by punctuation
+      splitPunct: ',.?!',
     });
 
-    // google-tts-api's getAllAudioBase64 returns an array of objects: { shortText, base64 }
-    // Actually, getting multiple base64 strings and playing them sequentially is one way.
-    // But `getAllAudioUrls` is better for playing on the frontend, OR we can combine base64 buffers.
-    // Wait, google-tts-api's `getAllAudioBase64` returns an array of objects. 
-    // Let's just return the array of base64 chunks or combined? Combining base64 MP3 chunks is tricky without ffmpeg.
-    // Let's use `getAllAudioUrls` instead, which returns an array of direct mp3 urls.
-    
-    // Wait, since we are doing it on the backend, returning multiple audioBase64 strings and making the frontend play them in a sequence is possible, but returning `getAllAudioUrls` is MUCH easier!
-    // Let's look at `google-tts-api` docs: `getAllAudioBase64` returns `Promise<{ shortText: string, base64: string }[]>`.
-    
-    // Actually, playing an array of URLs on the frontend is hard to sync with background music natively without a playlist component.
-    // Since we want to combine them, let's just stick to the text limits for now OR we can return the array and let the frontend play the first one?
-    // A better way: In node, we can easily concatenate base64 mp3s. 
-    // MP3s can be concatenated by just appending the binary buffers!
     const buffers = audioBase64Array.map(result => Buffer.from(result.base64, 'base64'));
     const combinedBuffer = Buffer.concat(buffers);
     const combinedBase64 = combinedBuffer.toString('base64');
-    
     const audioUrl = `data:audio/mp3;base64,${combinedBase64}`;
+
+    // Generate Background Music via Hugging Face API (MusicGen)
+    let bgUrl = null;
+    if (genre && bgMusic && process.env.HUGGINGFACE_API_KEY) {
+      try {
+        const hfPrompt = `${genre}, ${energy || 'Medium energy'}, ${tempo || '120 BPM'}, ${bgMusic} instrumental`;
+        console.log("Generating AI Music via HF API:", hfPrompt);
+        
+        const hfResponse = await fetch("https://api-inference.huggingface.co/models/facebook/musicgen-small", {
+          method: "POST",
+          headers: { 
+            "Authorization": `Bearer ${process.env.HUGGINGFACE_API_KEY}`,
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({ inputs: hfPrompt })
+        });
+        
+        if (hfResponse.ok) {
+          const arrayBuffer = await hfResponse.arrayBuffer();
+          const buffer = Buffer.from(arrayBuffer);
+          bgUrl = `data:audio/wav;base64,${buffer.toString('base64')}`;
+          console.log("HF Music Generated Successfully");
+        } else {
+          console.error("HF API Error:", await hfResponse.text());
+        }
+      } catch(e) {
+        console.error("HF API Exception:", e);
+      }
+    }
 
     return NextResponse.json({
       success: true,
-      message: "Audio generated successfully using open-source TTS.",
+      message: "Audio generated successfully using open-source TTS and HF MusicGen.",
       audioUrl: audioUrl,
+      bgUrl: bgUrl, // Send the AI generated background track if available
       meta: {
-        model: 'Google TTS (Open-Source Hindi Long Form)',
+        model: bgUrl ? 'Google TTS + MusicGen (HF API)' : 'Google TTS',
         tokens_used: textToSynthesize.length
       }
     });
