@@ -22,6 +22,8 @@ export default function WorkspacePage() {
   const [tempo, setTempo] = useState("120 BPM");
 
   const [script, setScript] = useState("");
+  const [musicPrompt, setMusicPrompt] = useState("");
+  const [ttsDirectives, setTtsDirectives] = useState("");
   const [isGenerating, setIsGenerating] = useState(false);
   const [generatedPrompt, setGeneratedPrompt] = useState("");
   const [audioResult, setAudioResult] = useState<string | null>(null);
@@ -72,7 +74,7 @@ export default function WorkspacePage() {
       const response = await fetch("/api/generate", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ prompt: generatedPrompt, format, script, genre, energy, tempo, bgMusic })
+        body: JSON.stringify({ prompt: generatedPrompt, format, script, genre, energy, tempo, bgMusic, musicPrompt, ttsDirectives })
       });
       
       const data = await response.json();
@@ -230,13 +232,38 @@ export default function WorkspacePage() {
               )}
             </div>
 
-            {/* Step 3: Script Writing */}
+            {/* Step 3: Script & Directives */}
             <div className={`space-y-6 transition-opacity duration-500 ${!format ? "opacity-30 pointer-events-none" : "opacity-100"}`}>
               <div className="flex items-center gap-4 border-b border-white/10 pb-4">
                 <span className="w-8 h-8 rounded-full bg-white text-black font-bold font-display flex items-center justify-center">3</span>
-                <h2 className="text-xl font-display font-bold tracking-widest uppercase">Content Script</h2>
+                <h2 className="text-xl font-display font-bold tracking-widest uppercase">Content Directives</h2>
               </div>
               
+              {/* Custom Directives Input */}
+              <div className="grid grid-cols-1 gap-6">
+                {format === "song" ? (
+                  <div className="space-y-2">
+                    <label className="font-mono text-xs tracking-widest uppercase text-secondary">Custom Music Prompt (For AI MusicGen)</label>
+                    <textarea 
+                      value={musicPrompt}
+                      onChange={(e) => setMusicPrompt(e.target.value)}
+                      placeholder="E.g., Epic Hans Zimmer style cinematic music with deep bass, 100 bpm..."
+                      className="w-full h-20 bg-neutral-900 border border-white/10 p-3 font-sans text-white focus:border-red-accent outline-none resize-none"
+                    />
+                  </div>
+                ) : (
+                  <div className="space-y-2">
+                    <label className="font-mono text-xs tracking-widest uppercase text-secondary">TTS Emotional Directives (Optional)</label>
+                    <textarea 
+                      value={ttsDirectives}
+                      onChange={(e) => setTtsDirectives(e.target.value)}
+                      placeholder="E.g., Speak very slowly with dramatic pauses, like a suspense thriller..."
+                      className="w-full h-20 bg-neutral-900 border border-white/10 p-3 font-sans text-white focus:border-red-accent outline-none resize-none"
+                    />
+                  </div>
+                )}
+              </div>
+
               <div className="bg-neutral-900 border border-white/10 focus-within:border-red-accent transition-colors">
                 <div className="flex items-center justify-between border-b border-white/10 p-2 bg-black/50">
                   <div className="flex gap-2">
@@ -251,7 +278,7 @@ export default function WorkspacePage() {
                 <textarea 
                   value={script}
                   onChange={(e) => setScript(e.target.value)}
-                  placeholder={`Write your ${format === 'song' ? 'lyrics' : 'script'} here... or use the AI generator above.`}
+                  placeholder={`Write your ${format === 'song' ? 'lyrics' : 'script'} here...`}
                   className="w-full h-48 bg-transparent p-4 font-sans text-white resize-none outline-none"
                 />
               </div>
@@ -306,8 +333,8 @@ export default function WorkspacePage() {
                     className="w-full h-10 outline-none" 
                     onPlay={() => {
                       const bgPlayer = document.getElementById("bg-audio-player") as HTMLAudioElement;
-                      if (bgPlayer && bgMusic !== "None") {
-                        bgPlayer.volume = 0.15; // Set background volume low (ducking effect)
+                      if (bgPlayer && (bgMusic !== "None" || format === "song")) {
+                        bgPlayer.volume = 0.08; // Lower ducking volume
                         bgPlayer.play().catch(e => console.error("BG Auto-play prevented", e));
                       }
                     }}
@@ -318,8 +345,20 @@ export default function WorkspacePage() {
                     onEnded={() => {
                       const bgPlayer = document.getElementById("bg-audio-player") as HTMLAudioElement;
                       if (bgPlayer) {
-                        bgPlayer.pause();
-                        bgPlayer.currentTime = 0;
+                        // Smooth fade out over 2.5 seconds
+                        let vol = bgPlayer.volume;
+                        const fadeStep = vol / 25; // 25 steps = 2.5s at 100ms interval
+                        const fadeOutInterval = setInterval(() => {
+                          if (vol > 0.01) {
+                            vol -= fadeStep;
+                            bgPlayer.volume = vol;
+                          } else {
+                            clearInterval(fadeOutInterval);
+                            bgPlayer.pause();
+                            bgPlayer.currentTime = 0;
+                            bgPlayer.volume = 0.08; // Reset for next play
+                          }
+                        }, 100);
                       }
                     }}
                   />

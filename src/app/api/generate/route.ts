@@ -4,7 +4,7 @@ import * as googleTTS from 'google-tts-api';
 export async function POST(req: Request) {
   try {
     const body = await req.json();
-    const { prompt, format, script, genre, energy, tempo, bgMusic } = body;
+    const { prompt, format, script, genre, energy, tempo, bgMusic, musicPrompt, ttsDirectives } = body;
 
     // Use the raw script instead of the full system prompt if available
     const rawContent = script || prompt;
@@ -13,7 +13,7 @@ export async function POST(req: Request) {
       return NextResponse.json({ error: "Missing content to generate" }, { status: 400 });
     }
 
-    // "Suno-like Jugaad": Clean the script to remove any emotional or structure tags like [Outro], (Pause), SYSTEM COMMAND: etc.
+    // Clean script
     let textToSynthesize = rawContent
       .replace(/\[.*?\]/g, '')
       .replace(/\(.*?\)/g, '')
@@ -29,6 +29,19 @@ export async function POST(req: Request) {
       .replace(/- Background Track:.*?\n/g, '')
       .trim();
 
+    // The "Jugaad" for TTS Emotions using Punctuation Formatting
+    if (ttsDirectives) {
+       const directives = ttsDirectives.toLowerCase();
+       if (directives.includes("excited") || directives.includes("high energy")) {
+         // Replace some periods with exclamation marks to raise pitch
+         textToSynthesize = textToSynthesize.replace(/\./g, '!');
+       }
+       if (directives.includes("slow") || directives.includes("dramatic") || directives.includes("storyteller") || directives.includes("serious")) {
+         // Add dramatic pauses by replacing periods with ellipses
+         textToSynthesize = textToSynthesize.replace(/\./g, '... ');
+       }
+    }
+
     if (!textToSynthesize) {
        textToSynthesize = "Please provide a valid script to read.";
     }
@@ -36,7 +49,7 @@ export async function POST(req: Request) {
     // Generate Audio using getAllAudioBase64 to support LONG text (>200 chars)
     const audioBase64Array = await googleTTS.getAllAudioBase64(textToSynthesize, {
       lang: 'hi',
-      slow: false,
+      slow: ttsDirectives && ttsDirectives.toLowerCase().includes("slow") ? true : false,
       host: 'https://translate.google.com',
       splitPunct: ',.?!',
     });
@@ -48,9 +61,10 @@ export async function POST(req: Request) {
 
     // Generate Background Music via Hugging Face API (MusicGen)
     let bgUrl = null;
-    if (genre && bgMusic && process.env.HUGGINGFACE_API_KEY) {
+    // Generate AI Music if explicitly requested via custom prompt OR if genre/bgMusic is set
+    if ((musicPrompt || (genre && bgMusic)) && process.env.HUGGINGFACE_API_KEY) {
       try {
-        const hfPrompt = `${genre}, ${energy || 'Medium energy'}, ${tempo || '120 BPM'}, ${bgMusic} instrumental`;
+        const hfPrompt = musicPrompt ? musicPrompt : `${genre}, ${energy || 'Medium energy'}, ${tempo || '120 BPM'}, ${bgMusic} instrumental`;
         console.log("Generating AI Music via HF API:", hfPrompt);
         
         const hfResponse = await fetch("https://api-inference.huggingface.co/models/facebook/musicgen-small", {
