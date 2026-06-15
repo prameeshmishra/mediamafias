@@ -293,7 +293,50 @@ export default function WorkspacePage() {
               {audioResult && (
                 <div className="mt-6 p-4 bg-green-500/10 border border-green-500/20 text-center animate-in fade-in zoom-in duration-300">
                   <p className="font-mono text-xs text-green-500 uppercase tracking-widest mb-4">PRODUCTION COMPLETE. LISTEN BELOW:</p>
-                  <audio controls src={audioResult} className="w-full h-10 outline-none" />
+                  
+                  {/* Main Voice Audio */}
+                  <audio 
+                    controls 
+                    src={audioResult} 
+                    className="w-full h-10 outline-none" 
+                    onPlay={() => {
+                      const bgPlayer = document.getElementById("bg-audio-player") as HTMLAudioElement;
+                      if (bgPlayer && bgMusic !== "None") {
+                        bgPlayer.volume = 0.15; // Set background volume low (ducking effect)
+                        bgPlayer.play().catch(e => console.error("BG Auto-play prevented", e));
+                      }
+                    }}
+                    onPause={() => {
+                      const bgPlayer = document.getElementById("bg-audio-player") as HTMLAudioElement;
+                      if (bgPlayer) bgPlayer.pause();
+                    }}
+                    onEnded={() => {
+                      const bgPlayer = document.getElementById("bg-audio-player") as HTMLAudioElement;
+                      if (bgPlayer) {
+                        bgPlayer.pause();
+                        bgPlayer.currentTime = 0;
+                      }
+                    }}
+                  />
+
+                  {/* Hidden Background Music Player */}
+                  {bgMusic !== "None" && format !== "song" && (
+                    <audio 
+                      id="bg-audio-player"
+                      loop
+                      src={
+                        bgMusic === "Lo-Fi / Chill" ? "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3" :
+                        bgMusic === "Tense Ambient" ? "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-8.mp3" :
+                        bgMusic === "Upbeat Corporate" ? "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-9.mp3" : ""
+                      } 
+                    />
+                  )}
+
+                  {bgMusic !== "None" && format !== "song" && (
+                    <p className="text-[9px] font-mono text-green-500/70 mt-2 uppercase tracking-widest">
+                      [ + MIXED WITH {bgMusic.toUpperCase()} BG TRACK ]
+                    </p>
+                  )}
                 </div>
               )}
               
