@@ -1,6 +1,8 @@
 import { NextResponse } from 'next/server';
-import * as googleTTS from 'google-tts-api';
-
+import { EdgeTTS } from 'node-edge-tts';
+import fs from 'fs';
+import path from 'path';
+import os from 'os';
 export async function POST(req: Request) {
   try {
     const body = await req.json();
@@ -46,17 +48,34 @@ export async function POST(req: Request) {
        textToSynthesize = "Please provide a valid script to read.";
     }
 
-    // Generate Audio using getAllAudioBase64 to support LONG text (>200 chars)
-    const audioBase64Array = await googleTTS.getAllAudioBase64(textToSynthesize, {
-      lang: 'hi',
-      slow: ttsDirectives && ttsDirectives.toLowerCase().includes("slow") ? true : false,
-      host: 'https://translate.google.com',
-      splitPunct: ',.?!',
+    // Generate Audio using node-edge-tts (Microsoft Neural TTS)
+    const voiceId = ttsDirectives && ttsDirectives.toLowerCase().includes("male") ? 'hi-IN-MadhurNeural' : 'hi-IN-SwaraNeural';
+    let pitch = 'default';
+    let rate = 'default';
+
+    if (ttsDirectives) {
+      const dirs = ttsDirectives.toLowerCase();
+      if (dirs.includes("excited")) pitch = '+10%';
+      if (dirs.includes("serious") || dirs.includes("deep")) pitch = '-10%';
+      
+      if (dirs.includes("slow") || dirs.includes("storyteller")) rate = '-15%';
+      if (dirs.includes("fast")) rate = '+15%';
+    }
+
+    const tts = new EdgeTTS({
+      voice: voiceId,
+      lang: 'hi-IN',
+      outputFormat: 'audio-24khz-48kbitrate-mono-mp3',
+      pitch: pitch,
+      rate: rate,
     });
 
-    const buffers = audioBase64Array.map(result => Buffer.from(result.base64, 'base64'));
-    const combinedBuffer = Buffer.concat(buffers);
-    const combinedBase64 = combinedBuffer.toString('base64');
+    const tempFilePath = path.join(os.tmpdir(), `tts_${Date.now()}.mp3`);
+    await tts.ttsPromise(textToSynthesize, tempFilePath);
+
+    const buffer = fs.readFileSync(tempFilePath);
+    const combinedBase64 = buffer.toString('base64');
+    fs.unlinkSync(tempFilePath); // Cleanup
     const audioUrl = `data:audio/mp3;base64,${combinedBase64}`;
 
     // Generate Background Music via Hugging Face API (MusicGen)
