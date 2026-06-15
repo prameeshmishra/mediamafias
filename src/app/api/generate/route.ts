@@ -80,31 +80,47 @@ export async function POST(req: Request) {
 
     // Generate Background Music via Hugging Face API (MusicGen)
     let bgUrl = null;
-    // Generate AI Music if explicitly requested via custom prompt OR if genre/bgMusic is set
     if ((musicPrompt || (genre && bgMusic)) && process.env.HUGGINGFACE_API_KEY) {
-      try {
-        const hfPrompt = musicPrompt ? musicPrompt : `${genre}, ${energy || 'Medium energy'}, ${tempo || '120 BPM'}, ${bgMusic} instrumental`;
-        console.log("Generating AI Music via HF API:", hfPrompt);
-        
-        const hfResponse = await fetch("https://api-inference.huggingface.co/models/facebook/musicgen-small", {
-          method: "POST",
-          headers: { 
-            "Authorization": `Bearer ${process.env.HUGGINGFACE_API_KEY}`,
-            "Content-Type": "application/json"
-          },
-          body: JSON.stringify({ inputs: hfPrompt })
-        });
-        
-        if (hfResponse.ok) {
-          const arrayBuffer = await hfResponse.arrayBuffer();
-          const buffer = Buffer.from(arrayBuffer);
-          bgUrl = `data:audio/wav;base64,${buffer.toString('base64')}`;
-          console.log("HF Music Generated Successfully");
-        } else {
-          console.error("HF API Error:", await hfResponse.text());
+      const hfPrompt = musicPrompt ? musicPrompt : `${genre}, ${energy || 'Medium energy'}, ${tempo || '120 BPM'}, ${bgMusic} instrumental`;
+      console.log("Generating AI Music via HF API:", hfPrompt);
+      
+      let attempts = 0;
+      let success = false;
+      
+      while (attempts < 3 && !success) {
+        try {
+          const hfResponse = await fetch("https://api-inference.huggingface.co/models/facebook/musicgen-small", {
+            method: "POST",
+            headers: { 
+              "Authorization": `Bearer ${process.env.HUGGINGFACE_API_KEY}`,
+              "Content-Type": "application/json"
+            },
+            body: JSON.stringify({ inputs: hfPrompt })
+          });
+          
+          if (hfResponse.ok) {
+            const arrayBuffer = await hfResponse.arrayBuffer();
+            const buffer = Buffer.from(arrayBuffer);
+            bgUrl = `data:audio/wav;base64,${buffer.toString('base64')}`;
+            console.log("HF Music Generated Successfully");
+            success = true;
+          } else {
+            const errorText = await hfResponse.text();
+            console.error(`HF API Error (Attempt ${attempts + 1}):`, errorText);
+            
+            // Handle "Model is loading" cold start
+            if (hfResponse.status === 503 && errorText.includes('currently loading')) {
+              console.log("Model is loading, waiting 15 seconds before retry...");
+              await new Promise(resolve => setTimeout(resolve, 15000));
+              attempts++;
+            } else {
+              break; // Break on other errors (like invalid token)
+            }
+          }
+        } catch(e) {
+          console.error(`HF API Exception (Attempt ${attempts + 1}):`, e);
+          break;
         }
-      } catch(e) {
-        console.error("HF API Exception:", e);
       }
     }
 
