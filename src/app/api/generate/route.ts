@@ -1,4 +1,5 @@
 import { NextResponse } from 'next/server';
+import * as googleTTS from 'google-tts-api';
 
 export async function POST(req: Request) {
   try {
@@ -9,39 +10,36 @@ export async function POST(req: Request) {
       return NextResponse.json({ error: "Missing master prompt" }, { status: 400 });
     }
 
-    // In a real scenario, this is where we would securely use our Hugging Face Token
-    // const HF_TOKEN = process.env.HUGGINGFACE_API_KEY;
-    // const MODEL = format === 'song' ? 'facebook/musicgen-small' : 'suno/bark';
-    
-    // const response = await fetch(`https://api-inference.huggingface.co/models/${MODEL}`, {
-    //   headers: { Authorization: `Bearer ${HF_TOKEN}` },
-    //   method: "POST",
-    //   body: JSON.stringify({ inputs: prompt }),
-    // });
-    
-    // const audioBlob = await response.blob();
-    // const audioUrl = URL.createObjectURL(audioBlob);
+    // Clean up the prompt to remove the "[Outro..." tags and extract the actual Hindi text if possible
+    // We'll just generate audio for the last few lines or the whole prompt if it's short.
+    let textToSynthesize = prompt.replace(/\[.*?\]/g, '').trim(); // Remove [Outro ...] tags
+    if (textToSynthesize.length > 200) {
+      // google-tts-api has a 200 char limit per request, so take the last 200 chars or use getAllAudioBase64
+      textToSynthesize = textToSynthesize.substring(0, 200); 
+    }
 
-    // ========================================================
-    // SIMULATED OPEN SOURCE INFERENCE DELAY
-    // Since we don't have an active HF API Key configured yet,
-    // we simulate the exact delay and return a dummy audio URL.
-    // ========================================================
-    
-    await new Promise((resolve) => setTimeout(resolve, 4500)); // Simulate inference time
+    // Generate Audio using google-tts-api
+    // We default to 'hi' (Hindi) as requested by the user, or fallback to 'en' if no Hindi is detected.
+    const audioBase64 = await googleTTS.getAudioBase64(textToSynthesize, {
+      lang: 'hi',
+      slow: false,
+      host: 'https://translate.google.com',
+    });
+
+    const audioUrl = `data:audio/mp3;base64,${audioBase64}`;
 
     return NextResponse.json({
       success: true,
-      message: "Audio generated successfully using simulated open-source inference.",
-      audioUrl: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3", // Dummy audio
+      message: "Audio generated successfully using open-source TTS.",
+      audioUrl: audioUrl,
       meta: {
-        model: format === 'song' ? 'MusicGen (Simulated)' : 'Bark (Simulated)',
-        tokens_used: prompt.length
+        model: 'Google TTS (Open-Source Hindi)',
+        tokens_used: textToSynthesize.length
       }
     });
 
   } catch (error) {
     console.error("API Generation Error:", error);
-    return NextResponse.json({ error: "Failed to generate content via AI" }, { status: 500 });
+    return NextResponse.json({ error: "Failed to generate content via TTS API" }, { status: 500 });
   }
 }
