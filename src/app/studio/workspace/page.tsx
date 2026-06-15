@@ -70,7 +70,7 @@ export default function WorkspacePage() {
       const response = await fetch("/api/generate", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ prompt: generatedPrompt, format })
+        body: JSON.stringify({ prompt: generatedPrompt, format, script })
       });
       
       const data = await response.json();
