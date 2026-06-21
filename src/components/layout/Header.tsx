@@ -13,7 +13,6 @@ export const Header = () => {
 
   const links: { name: string; href: string; external?: boolean }[] = [
     { name: "Creator Academy", href: "/academy" },
-    { name: "Studio", href: "/studio" },
     { name: "Spotlight", href: "/spotlight" },
     { name: "Distribution", href: "/distribution" },
     { name: "Content API", href: "/api-pipeline" },
